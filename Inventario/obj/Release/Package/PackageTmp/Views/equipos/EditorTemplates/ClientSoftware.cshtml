@@ -1,0 +1,37 @@
+﻿@using Inventario.Models
+@using System.Collections
+@model System.Int32?
+
+
+
+@{
+
+    var test = ViewBag.softwares;
+
+}
+
+
+@*@Html.DropDownList("softwares",null, htmlAttributes: new { @class = "form-control" })*@
+
+
+
+@(Html.Kendo().DropDownList()
+            .Name("software_nombre")
+            .DataValueField("Value")
+            .DataTextField("Text")
+            
+            //.Filter("contains")
+            .AutoBind(true)
+     //.MinLength(4)
+     .BindTo(ViewBag.softwares)
+    //.DataSource(s =>
+    //{
+    //    s.Read(
+    //        r =>
+    //        { r.Action("ReadSoftware", "equipos"); }
+
+    //        ).ServerFiltering(false);
+    //})
+
+
+    )

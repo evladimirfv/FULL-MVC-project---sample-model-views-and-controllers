@@ -1,0 +1,33 @@
+﻿@using Inventario.Models
+@using System.Collections
+@model System.Int32?
+
+
+
+@{
+
+    var test = ViewBag.equipos;
+
+}
+
+
+@(Html.Kendo().DropDownList()
+            .Name("equipo_nombre")
+            .DataValueField("Value")
+            .DataTextField("Text")
+            
+            //.Filter("contains")
+            .AutoBind(true)
+     //.MinLength(4)
+     .BindTo(ViewBag.equipos)
+    //.DataSource(s =>
+    //{
+    //    s.Read(
+    //        r =>
+    //        { r.Action("ReadSoftware", "equipos"); }
+
+    //        ).ServerFiltering(false);
+    //})
+
+
+    )

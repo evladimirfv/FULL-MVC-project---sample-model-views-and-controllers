@@ -1,0 +1,8 @@
+** FILTROS **
+https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/sorting-filtering-and-paging-with-the-entity-framework-in-an-asp-net-mvc-application
+
+
+ @*https://tutorial    shelper.com/dynamically-populated-treeview-in-kendo-using-mvc-2/*@
+
+
+Install-Package NonFactors.Grid.Mvc5

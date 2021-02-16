@@ -1,0 +1,126 @@
+﻿@model PagedList.IPagedList<Inventario.Models.software>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="font-weight:bold">Software</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr class="blackImportant">
+        <th style="width:100px">
+            Nombre
+        </th>
+        <th style="width:100px">
+            Versión
+        </th>
+        <th style="width:80px">
+            Código
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.informacion_tecnica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.configuraciones)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.es_activo)
+            </th>*@
+        <th style="width:100px">
+            # Total Licencias
+        </th>
+        <th style="width:100px">
+            # Licencias instaladas
+        </th>
+        <th>
+            Proveedor
+        </th>
+        <th>
+            Categoría
+        </th>
+        <th>
+            @using (Html.BeginForm())
+            {
+                <div style="display:inline-block">
+                    @Html.TextBox("searchString", null, new { @class = "resizedTextbox" })
+                    <input id="buscarSubmit" type="submit" class="lupaImage" value="Buscar" />   @* btn btn-primary *@
+                    <button class="cancelarImage" onclick="clean();"> X </button>
+                </div>
+
+            }
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.version)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.codigo)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.informacion_tecnica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.configuraciones)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.es_activo)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.licencias_adquiridas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.licencias_instaladas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.proveedor.nombre_comercial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo_de_software.categoria)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.idsoftware }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Ver", "Details", new { id = item.idsoftware }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Borrar", "Delete", new { id = item.idsoftware }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+<div style="margin-left: 20px">
+    @* Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount   *@
+    @Html.PagedListPager(Model, Page_No => Url.Action("Index",
+        new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
+</div>
+
+<script>
+
+    function clean() {
+        document.getElementById('searchString').value = "";
+        document.getElementById('buscarSubmit').click();
+    }
+
+</script>
+
+<script>
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+
+
+</script>

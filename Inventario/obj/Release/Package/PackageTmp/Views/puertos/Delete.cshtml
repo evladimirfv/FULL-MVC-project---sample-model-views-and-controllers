@@ -1,0 +1,50 @@
+﻿@model Inventario.Models.puerto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+@{
+    string toUpFirst(MvcHtmlString ss)
+    {
+        string s = ss.ToString();
+        s = s.Substring(0, 1).ToUpper() + s.Substring(1);
+        return s;
+    }
+}
+
+<div style="margin-left: 20px;margin-top: 20px">
+    <h4>Está seguro que desea eliminar el siguiente Puerto ?   </h4>
+
+    <hr />
+    <dl class="col-xs-12">
+        <dt class="blackImportant">
+            @toUpFirst(@Html.DisplayNameFor(model => model.nombre))
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt class="blackImportant">
+            @toUpFirst(@Html.DisplayNameFor(model => model.especificaciones))
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.especificaciones)
+        </dd>
+
+        
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary" /> 
+            @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>

@@ -1,0 +1,68 @@
+﻿@using Inventario.Views
+@model Inventario.Models.atributo
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal left-half" style="margin-left:0px!important;margin-top:15px!important;">
+    <h4 style="font-weight:bold;">Nuevo Atributo de equipo (Custom) </h4>
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tipo_dato_fk, "tipo_dato_fk", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("tipo_dato_fk", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tipo_dato_fk, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.es_requerido, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.CheckBoxIntFor(model => model.es_requerido, new { htmlAttributes = new { @class = "form-control" } }, "false")
+            @Html.ValidationMessageFor(model => model.es_requerido, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script>
+
+        //$(document).ready(function() {       
+        //    $('#es_requerido').val($(this).is(':checked'));        
+        //    //$('#checkbox1').click(function() {
+        //    //    $('#textbox2').val($(this).is(':checked'));
+        //    //});
+        //});
+</script>

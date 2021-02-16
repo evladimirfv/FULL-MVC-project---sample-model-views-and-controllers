@@ -1,0 +1,26 @@
+﻿@model Inventario.Models.tipo_de_software
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h4>tipo_de_software</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.categoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categoria)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idtipo_de_software }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

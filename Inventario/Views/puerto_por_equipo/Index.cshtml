@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Inventario.Models.puerto_por_equipo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="font-weight:bold">Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.numero_de_puertos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.equipo.s_equipo_numero_serie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.puerto.nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.numero_de_puertos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.equipo.s_equipo_numero_serie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.puerto.nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

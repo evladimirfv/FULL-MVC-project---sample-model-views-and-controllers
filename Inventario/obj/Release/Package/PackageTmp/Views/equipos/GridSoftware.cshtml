@@ -1,0 +1,246 @@
+﻿
+
+@*<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.default-v2.min.css" />
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>*@
+
+
+@{
+    Layout = null;
+}
+
+
+@{
+
+    var test = ViewBag.sofwares;
+
+
+    //List<Inventario.Models.software_por_equipo> sxe = (List<Inventario.Models.software_por_equipo>) TempData["spe"];
+    //TempData["spe"] = sxe;
+}
+
+
+@model IEnumerable<Inventario.Models.software_por_equipo>
+
+@{
+    var modelo = new List<Inventario.Models.software_por_equipo>();
+    var nextEquipoId = ViewBag.nextEquipoId;
+}
+
+@(Html.Kendo().Grid(Model)   @*<Inventario.Models.software_por_equipo>()*@
+    .Name("gridSoftware")
+   
+    .EnableCustomBinding(true)
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.equipo_fk).Hidden();
+        columns.Bound(p => p.software_fk).Hidden(); /*.EditorTemplateName("ClientSoftware").ClientTemplate("#= software_fk#");*/
+        columns.Bound(p => p.software_por_equipo_unique_id).Hidden();
+
+        columns.Bound(p => p.software_nombre).Width(100).Title("Software").EditorTemplateName("ClientSoftware").ClientTemplate("#= software_nombre#");
+
+        columns.Bound(p => p.observaciones).Title("Observaciones").Width(100);
+
+        columns.Command(command =>
+        { command.Edit().Text(" "); command.Destroy().Text(" "); }).Title(" ").Width(150);
+    })
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("Continue to delete this record?").DisplayDeleteConfirmation("Continue to delete this record?"))
+     .Events(ev => ev.Edit("editSoftware"))
+    .Pageable()
+    //.AutoBind(false)
+    .Sortable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:250px;width:450px" })
+
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Events(events => events.Error("error_handler"))
+
+
+        .Model(
+            model =>
+            {
+                model.Field(p => p.equipo_fk);
+                model.Field(p => p.software_fk);
+                model.Field(p => p.software_nombre);
+                model.Field(p => p.observaciones);
+                model.Id(p => p.software_por_equipo_unique_id);
+
+
+
+                //model.Field(p => p.software).DefaultValue(ViewData["defaultSoftware"] as Inventario.Models.software);
+            }
+
+        )
+        .Create(update => update.Action("EditingInline_Create", "equipos"))
+        .Read(read => read.Action("EditingInline_Read", "equipos"))
+        .Update(update => update.Action("EditingInline_Update", "equipos"))
+        .Destroy(update => update.Action("EditingInline_Destroy", "equipos"))
+
+
+    )
+)
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
+
+<script>
+    //function onRequestStart(e) {
+    //    if (e.type === "read" && $("#Id").val() === "0") {
+    //        e.preventDefault();
+
+    //    }
+
+    //}
+</script>
+
+
+<script>
+
+    //function edit(e) {
+    //    debugger;
+    //    if (e.model.isNew() == false) {
+    //        var i = 2;
+    //        var columna = $('[name="software_nombre"]');
+    //       // columna.enable(true);
+    //        e.model.software_nombre.isEditable = false;
+    //       // $('[name="software_nombre"]').attr("readOnly", true);
+    //    }
+    //}
+
+    //function edit(e) {
+    //    if (e.model.isNew() == false) {
+
+    //        debugger;
+    //        var numeric = e.container.find("input[name=software_nombre]").data("input");
+    //        numeric.enable = false;
+    //    }
+    //}
+
+    function editSoftware(e) {
+        debugger;
+        if (e.model.isNew() == false) {
+            var i = 2;
+            var columna = $('[name="software_nombre"]').data("kendoDropDownList");
+            // columna.enable(true);
+
+            var sfkmodelval = e.model.software_fk;
+            // Get current software_fk value                             
+
+            $('[name="software_nombre"]').data("kendoDropDownList").value(sfkmodelval);
+
+
+            var currentVal = columna.val;
+
+            columna.enable(false);
+
+
+            $('[name="software_nombre"]').val(3).change();
+
+
+            // e.model.software_nombre.isEditable = false;
+
+        }
+    }
+
+
+
+
+
+</script>
+
+
+
+
+
+@*<div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            columns: [
+                { field: "id" },
+                { field: "name" },
+                { field: "age" },
+                { command: "edit" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, name: "Jane Doe", age: 30 },
+                    { id: 2, name: "John Doe", age: 33 }
+                ],
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            "id": { type: "number" }
+                        }
+                    }
+                }
+            },
+            editable: "inline",
+            toolbar: ["create"],
+            edit: function (e) {
+                if (!e.model.isNew()) {
+                    // Disable the editor of the "id" column when editing data items
+                    var numeric = e.container.find("input[name=id]").data("kendoNumericTextBox");
+                    numeric.enable(false);
+                }
+            }
+        });
+    </script>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ @*function edit(e) {
+        debugger;
+        if (e.model.isNew() == false) {
+            var i = 2;
+            var columna = $('[name="software_nombre"]').data("kendoDropDownList");
+           // columna.enable(true);
+
+
+            // Get current software_fk value
+           //  var sfk = $('[name="software_fk"]').data("kendoTextBox").value;
+
+            $('[name="software_nombre"]').data("kendoDropDownList").value("3");
+
+
+            var currentVal = columna.val;
+
+            columna.enable(false);
+
+
+            $('[name="software_nombre"]').val(3).change();
+
+
+             // e.model.software_nombre.isEditable = false;
+
+        }
+    }*@

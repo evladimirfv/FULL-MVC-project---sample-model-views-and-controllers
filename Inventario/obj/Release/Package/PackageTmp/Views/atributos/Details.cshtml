@@ -1,0 +1,45 @@
+﻿@model Inventario.Models.atributo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h2 style="font-weight:bold;">Atributo</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            Es requerido
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.es_requerido)
+        </dd>
+
+        <dt>
+            Tipo de dato
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_dato.nombre)
+        </dd>
+
+    </dl>
+</div>
+
+
+<div class="col-md-offset-2" style="width:300px!important;display:inline-block!important;">
+    @Html.ActionLink("Listado", "Index", null, new { @class = "btn btn-primary btn-lg" })
+    @*<div class="divider"></div>*@
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idatributo }, new { @class = "btn btn-primary btn-lg" })
+</div>

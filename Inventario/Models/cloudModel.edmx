@@ -1,0 +1,1509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cloudmanageModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="atributo">
+          <Key>
+            <PropertyRef Name="idatributo" />
+          </Key>
+          <Property Name="idatributo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tipo_dato_fk" Type="int" Nullable="false" />
+          <Property Name="es_requerido" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="atributo_por_equipo">
+          <Key>
+            <PropertyRef Name="atributo_fk" />
+            <PropertyRef Name="equipo_fk" />
+          </Key>
+          <Property Name="atributo_fk" Type="int" Nullable="false" />
+          <Property Name="equipo_fk" Type="int" Nullable="false" />
+          <Property Name="valor_atributo" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ciudad">
+          <Key>
+            <PropertyRef Name="idciudad" />
+          </Key>
+          <Property Name="idciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="compania">
+          <Key>
+            <PropertyRef Name="idcompania" />
+          </Key>
+          <Property Name="idcompania" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" />
+          <Property Name="telefono" Type="varchar" MaxLength="45" />
+          <Property Name="celular" Type="varchar" MaxLength="45" />
+          <Property Name="contacto" Type="varchar" MaxLength="200" />
+          <Property Name="pais_fk" Type="int" />
+          <Property Name="ciudad_fk" Type="int" />
+          <Property Name="direccion" Type="varchar" MaxLength="255" />
+          <Property Name="ruc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="equipo">
+          <Key>
+            <PropertyRef Name="idequipo" />
+          </Key>
+          <Property Name="idequipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ubicacion_fk" Type="int" />
+          <Property Name="tipo_de_equipo_fk" Type="int" />
+          <Property Name="marca_modelo_fk" Type="int" />
+          <Property Name="s_equipo_numero_serie" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="altura_u" Type="int" />
+          <Property Name="prof_inch" Type="int" />
+          <Property Name="es_contenido" Type="tinyint" Nullable="false" />
+          <Property Name="s_equipo_fecha_configuracion" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="responsable_fk" Type="int" />
+          <Property Name="es_propio" Type="tinyint" Nullable="false" />
+          <Property Name="comentarios" Type="varchar" MaxLength="1000" />
+          <Property Name="path_imagen" Type="varchar" MaxLength="255" />
+          <Property Name="es_activo" Type="tinyint" Nullable="false" />
+          <Property Name="es_virtual" Type="tinyint" Nullable="false" />
+          <Property Name="proveedor_fk" Type="int" />
+        </EntityType>
+        <EntityType Name="equipo_por_rack">
+          <Key>
+            <PropertyRef Name="equipo_fk" />
+            <PropertyRef Name="rack_fk" />
+          </Key>
+          <Property Name="equipo_fk" Type="int" Nullable="false" />
+          <Property Name="rack_fk" Type="int" Nullable="false" />
+          <Property Name="observaciones" Type="varchar" MaxLength="200" />
+          <Property Name="inicia_u" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="marca_modelo">
+          <Key>
+            <PropertyRef Name="idmarca_modelo" />
+          </Key>
+          <Property Name="idmarca_modelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marca" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="modelo" Type="varchar" MaxLength="255" />
+          <Property Name="especificaciones" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="pais">
+          <Key>
+            <PropertyRef Name="idpais" />
+          </Key>
+          <Property Name="idpais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="idproveedor" />
+          </Key>
+          <Property Name="idproveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_comercial" Type="varchar" MaxLength="100" />
+          <Property Name="nombre_contacto_1" Type="varchar" MaxLength="100" />
+          <Property Name="telefono_contacto_1" Type="varchar" MaxLength="15" />
+          <Property Name="nombre_contacto_2" Type="varchar" MaxLength="100" />
+          <Property Name="telefono_contacto_2" Type="varchar" MaxLength="15" />
+          <Property Name="email_soporte" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="puerto">
+          <Key>
+            <PropertyRef Name="idpuerto" />
+          </Key>
+          <Property Name="idpuerto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+          <Property Name="especificaciones" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="puerto_por_equipo">
+          <Key>
+            <PropertyRef Name="equipo_fk" />
+            <PropertyRef Name="puerto_fk" />
+          </Key>
+          <Property Name="equipo_fk" Type="int" Nullable="false" />
+          <Property Name="puerto_fk" Type="int" Nullable="false" />
+          <Property Name="numero_de_puertos" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="rack">
+          <Key>
+            <PropertyRef Name="idrack" />
+          </Key>
+          <Property Name="idrack" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo" Type="varchar" MaxLength="45" />
+          <Property Name="nombre" Type="varchar" MaxLength="45" />
+          <Property Name="ubicacion_fk" Type="int" />
+          <Property Name="orden" Type="int" />
+          <Property Name="altura_u" Type="int" />
+          <Property Name="prof_inch" Type="int" />
+          <Property Name="proveedor_fk" Type="int" />
+        </EntityType>
+        <EntityType Name="responsable">
+          <Key>
+            <PropertyRef Name="idresponsable" />
+          </Key>
+          <Property Name="idresponsable" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula_ruc" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="software">
+          <Key>
+            <PropertyRef Name="idsoftware" />
+          </Key>
+          <Property Name="idsoftware" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+          <Property Name="version" Type="varchar" MaxLength="50" />
+          <Property Name="codigo" Type="varchar" MaxLength="100" />
+          <Property Name="proveedor_fk" Type="int" />
+          <Property Name="tipo_software_fk" Type="int" />
+          <Property Name="informacion_tecnica" Type="varchar" MaxLength="1000" />
+          <Property Name="configuraciones" Type="varchar" MaxLength="1000" />
+          <Property Name="es_activo" Type="tinyint" Nullable="false" />
+          <Property Name="licencias_adquiridas" Type="int" />
+          <Property Name="licencias_instaladas" Type="int" />
+        </EntityType>
+        <EntityType Name="software_por_equipo">
+          <Key>
+            <PropertyRef Name="equipo_fk" />
+            <PropertyRef Name="software_fk" />
+          </Key>
+          <Property Name="equipo_fk" Type="int" Nullable="false" />
+          <Property Name="software_fk" Type="int" Nullable="false" />
+          <Property Name="observaciones" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="tipo_dato">
+          <Key>
+            <PropertyRef Name="idtipo_dato" />
+          </Key>
+          <Property Name="idtipo_dato" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="formato_tabla" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="regex" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tipo_de_equipo">
+          <Key>
+            <PropertyRef Name="idtipo_de_equipo" />
+          </Key>
+          <Property Name="idtipo_de_equipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoria" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tipo_de_software">
+          <Key>
+            <PropertyRef Name="idtipo_de_software" />
+          </Key>
+          <Property Name="idtipo_de_software" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoria" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ubicacion">
+          <Key>
+            <PropertyRef Name="idubicacion" />
+          </Key>
+          <Property Name="idubicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="255" />
+          <Property Name="coordenadas" Type="varchar" MaxLength="45" />
+          <Property Name="nombre_de_contacto" Type="varchar" MaxLength="200" />
+          <Property Name="telefono_de_contacto" Type="varchar" MaxLength="45" />
+          <Property Name="celular_de_contacto" Type="varchar" MaxLength="45" />
+          <Property Name="es_datacenter" Type="tinyint" Nullable="false" />
+          <Property Name="es_cloud" Type="tinyint" Nullable="false" />
+          <Property Name="compania_fk" Type="int" />
+          <Property Name="pais_fk" Type="int" />
+          <Property Name="ciudad_fk" Type="int" />
+          <Property Name="es_activo" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_atributo_por_equipo_atributo1">
+          <End Role="atributo" Type="Self.atributo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="atributo_por_equipo" Type="Self.atributo_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="atributo">
+              <PropertyRef Name="idatributo" />
+            </Principal>
+            <Dependent Role="atributo_por_equipo">
+              <PropertyRef Name="atributo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_atributo_por_equipo_equipo1">
+          <End Role="equipo" Type="Self.equipo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="atributo_por_equipo" Type="Self.atributo_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="idequipo" />
+            </Principal>
+            <Dependent Role="atributo_por_equipo">
+              <PropertyRef Name="equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compania_ciudad1">
+          <End Role="ciudad" Type="Self.ciudad" Multiplicity="0..1" />
+          <End Role="compania" Type="Self.compania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ciudad">
+              <PropertyRef Name="idciudad" />
+            </Principal>
+            <Dependent Role="compania">
+              <PropertyRef Name="ciudad_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compania_pais1">
+          <End Role="pais" Type="Self.pais" Multiplicity="0..1" />
+          <End Role="compania" Type="Self.compania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pais">
+              <PropertyRef Name="idpais" />
+            </Principal>
+            <Dependent Role="compania">
+              <PropertyRef Name="pais_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_equipo_marcamodelo">
+          <End Role="marca_modelo" Type="Self.marca_modelo" Multiplicity="0..1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marca_modelo">
+              <PropertyRef Name="idmarca_modelo" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="marca_modelo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_por_rack_equipo1">
+          <End Role="equipo" Type="Self.equipo" Multiplicity="1" />
+          <End Role="equipo_por_rack" Type="Self.equipo_por_rack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="idequipo" />
+            </Principal>
+            <Dependent Role="equipo_por_rack">
+              <PropertyRef Name="equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_por_rack_rack1">
+          <End Role="rack" Type="Self.rack" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="equipo_por_rack" Type="Self.equipo_por_rack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rack">
+              <PropertyRef Name="idrack" />
+            </Principal>
+            <Dependent Role="equipo_por_rack">
+              <PropertyRef Name="rack_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_proveedor">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="idproveedor" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="proveedor_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_responsable">
+          <End Role="responsable" Type="Self.responsable" Multiplicity="0..1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="responsable">
+              <PropertyRef Name="idresponsable" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="responsable_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_tipo_de_equipo1">
+          <End Role="tipo_de_equipo" Type="Self.tipo_de_equipo" Multiplicity="0..1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_de_equipo">
+              <PropertyRef Name="idtipo_de_equipo" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="tipo_de_equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_ubicacion1">
+          <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="0..1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ubicacion">
+              <PropertyRef Name="idubicacion" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="ubicacion_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puerto_por_equipo_equipo1">
+          <End Role="equipo" Type="Self.equipo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="puerto_por_equipo" Type="Self.puerto_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="idequipo" />
+            </Principal>
+            <Dependent Role="puerto_por_equipo">
+              <PropertyRef Name="equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puerto_por_equipo_puerrto">
+          <End Role="puerto" Type="Self.puerto" Multiplicity="1" />
+          <End Role="puerto_por_equipo" Type="Self.puerto_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="puerto">
+              <PropertyRef Name="idpuerto" />
+            </Principal>
+            <Dependent Role="puerto_por_equipo">
+              <PropertyRef Name="puerto_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rack_proveedor">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
+          <End Role="rack" Type="Self.rack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="idproveedor" />
+            </Principal>
+            <Dependent Role="rack">
+              <PropertyRef Name="proveedor_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rack_ubicacion1">
+          <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="0..1" />
+          <End Role="rack" Type="Self.rack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ubicacion">
+              <PropertyRef Name="idubicacion" />
+            </Principal>
+            <Dependent Role="rack">
+              <PropertyRef Name="ubicacion_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_software_por_equipo_equipo1">
+          <End Role="equipo" Type="Self.equipo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="software_por_equipo" Type="Self.software_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="idequipo" />
+            </Principal>
+            <Dependent Role="software_por_equipo">
+              <PropertyRef Name="equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_software_por_equipo_software1">
+          <End Role="software" Type="Self.software" Multiplicity="1" />
+          <End Role="software_por_equipo" Type="Self.software_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="software">
+              <PropertyRef Name="idsoftware" />
+            </Principal>
+            <Dependent Role="software_por_equipo">
+              <PropertyRef Name="software_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_software_proveedor">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
+          <End Role="software" Type="Self.software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="idproveedor" />
+            </Principal>
+            <Dependent Role="software">
+              <PropertyRef Name="proveedor_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_software_tipo_de_software1">
+          <End Role="tipo_de_software" Type="Self.tipo_de_software" Multiplicity="0..1" />
+          <End Role="software" Type="Self.software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_de_software">
+              <PropertyRef Name="idtipo_de_software" />
+            </Principal>
+            <Dependent Role="software">
+              <PropertyRef Name="tipo_software_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_DATO_ATRIBUTO">
+          <End Role="tipo_dato" Type="Self.tipo_dato" Multiplicity="1" />
+          <End Role="atributo" Type="Self.atributo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_dato">
+              <PropertyRef Name="idtipo_dato" />
+            </Principal>
+            <Dependent Role="atributo">
+              <PropertyRef Name="tipo_dato_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ubicacion_ciudad">
+          <End Role="ciudad" Type="Self.ciudad" Multiplicity="0..1" />
+          <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ciudad">
+              <PropertyRef Name="idciudad" />
+            </Principal>
+            <Dependent Role="ubicacion">
+              <PropertyRef Name="ciudad_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ubicacion_compania1">
+          <End Role="compania" Type="Self.compania" Multiplicity="0..1" />
+          <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compania">
+              <PropertyRef Name="idcompania" />
+            </Principal>
+            <Dependent Role="ubicacion">
+              <PropertyRef Name="compania_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ubicacion_pais1">
+          <End Role="pais" Type="Self.pais" Multiplicity="0..1" />
+          <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pais">
+              <PropertyRef Name="idpais" />
+            </Principal>
+            <Dependent Role="ubicacion">
+              <PropertyRef Name="pais_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cloudmanageModelStoreContainer">
+          <EntitySet Name="atributo" EntityType="Self.atributo" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="atributo_por_equipo" EntityType="Self.atributo_por_equipo" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="ciudad" EntityType="Self.ciudad" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="compania" EntityType="Self.compania" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="equipo" EntityType="Self.equipo" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="equipo_por_rack" EntityType="Self.equipo_por_rack" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="marca_modelo" EntityType="Self.marca_modelo" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="pais" EntityType="Self.pais" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="puerto" EntityType="Self.puerto" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="puerto_por_equipo" EntityType="Self.puerto_por_equipo" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="rack" EntityType="Self.rack" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="responsable" EntityType="Self.responsable" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="software" EntityType="Self.software" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="software_por_equipo" EntityType="Self.software_por_equipo" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="tipo_dato" EntityType="Self.tipo_dato" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="tipo_de_equipo" EntityType="Self.tipo_de_equipo" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="tipo_de_software" EntityType="Self.tipo_de_software" Schema="cloudmanage" store:Type="Tables" />
+          <EntitySet Name="ubicacion" EntityType="Self.ubicacion" Schema="cloudmanage" store:Type="Tables" />
+          <AssociationSet Name="fk_atributo_por_equipo_atributo1" Association="Self.fk_atributo_por_equipo_atributo1">
+            <End Role="atributo" EntitySet="atributo" />
+            <End Role="atributo_por_equipo" EntitySet="atributo_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_atributo_por_equipo_equipo1" Association="Self.fk_atributo_por_equipo_equipo1">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="atributo_por_equipo" EntitySet="atributo_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compania_ciudad1" Association="Self.fk_compania_ciudad1">
+            <End Role="ciudad" EntitySet="ciudad" />
+            <End Role="compania" EntitySet="compania" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compania_pais1" Association="Self.fk_compania_pais1">
+            <End Role="pais" EntitySet="pais" />
+            <End Role="compania" EntitySet="compania" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_equipo_marcamodelo" Association="Self.fk_equipo_equipo_marcamodelo">
+            <End Role="marca_modelo" EntitySet="marca_modelo" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_por_rack_equipo1" Association="Self.fk_equipo_por_rack_equipo1">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="equipo_por_rack" EntitySet="equipo_por_rack" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_por_rack_rack1" Association="Self.fk_equipo_por_rack_rack1">
+            <End Role="rack" EntitySet="rack" />
+            <End Role="equipo_por_rack" EntitySet="equipo_por_rack" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_proveedor" Association="Self.fk_equipo_proveedor">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_responsable" Association="Self.fk_equipo_responsable">
+            <End Role="responsable" EntitySet="responsable" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_tipo_de_equipo1" Association="Self.fk_equipo_tipo_de_equipo1">
+            <End Role="tipo_de_equipo" EntitySet="tipo_de_equipo" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_ubicacion1" Association="Self.fk_equipo_ubicacion1">
+            <End Role="ubicacion" EntitySet="ubicacion" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puerto_por_equipo_equipo1" Association="Self.fk_puerto_por_equipo_equipo1">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="puerto_por_equipo" EntitySet="puerto_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puerto_por_equipo_puerrto" Association="Self.fk_puerto_por_equipo_puerrto">
+            <End Role="puerto" EntitySet="puerto" />
+            <End Role="puerto_por_equipo" EntitySet="puerto_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rack_proveedor" Association="Self.fk_rack_proveedor">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="rack" EntitySet="rack" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rack_ubicacion1" Association="Self.fk_rack_ubicacion1">
+            <End Role="ubicacion" EntitySet="ubicacion" />
+            <End Role="rack" EntitySet="rack" />
+          </AssociationSet>
+          <AssociationSet Name="fk_software_por_equipo_equipo1" Association="Self.fk_software_por_equipo_equipo1">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="software_por_equipo" EntitySet="software_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_software_por_equipo_software1" Association="Self.fk_software_por_equipo_software1">
+            <End Role="software" EntitySet="software" />
+            <End Role="software_por_equipo" EntitySet="software_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_software_proveedor" Association="Self.fk_software_proveedor">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="software" EntitySet="software" />
+          </AssociationSet>
+          <AssociationSet Name="fk_software_tipo_de_software1" Association="Self.fk_software_tipo_de_software1">
+            <End Role="tipo_de_software" EntitySet="tipo_de_software" />
+            <End Role="software" EntitySet="software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_DATO_ATRIBUTO" Association="Self.FK_TIPO_DATO_ATRIBUTO">
+            <End Role="tipo_dato" EntitySet="tipo_dato" />
+            <End Role="atributo" EntitySet="atributo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ubicacion_ciudad" Association="Self.fk_ubicacion_ciudad">
+            <End Role="ciudad" EntitySet="ciudad" />
+            <End Role="ubicacion" EntitySet="ubicacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ubicacion_compania1" Association="Self.fk_ubicacion_compania1">
+            <End Role="compania" EntitySet="compania" />
+            <End Role="ubicacion" EntitySet="ubicacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ubicacion_pais1" Association="Self.fk_ubicacion_pais1">
+            <End Role="pais" EntitySet="pais" />
+            <End Role="ubicacion" EntitySet="ubicacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cloudmanageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cloudmanageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="atributo" EntityType="cloudmanageModel.atributo" />
+          <EntitySet Name="atributo_por_equipo" EntityType="cloudmanageModel.atributo_por_equipo" />
+          <EntitySet Name="ciudad" EntityType="cloudmanageModel.ciudad" />
+          <EntitySet Name="compania" EntityType="cloudmanageModel.compania" />
+          <EntitySet Name="equipo" EntityType="cloudmanageModel.equipo" />
+          <EntitySet Name="equipo_por_rack" EntityType="cloudmanageModel.equipo_por_rack" />
+          <EntitySet Name="marca_modelo" EntityType="cloudmanageModel.marca_modelo" />
+          <EntitySet Name="pais" EntityType="cloudmanageModel.pais" />
+          <EntitySet Name="proveedor" EntityType="cloudmanageModel.proveedor" />
+          <EntitySet Name="puerto" EntityType="cloudmanageModel.puerto" />
+          <EntitySet Name="puerto_por_equipo" EntityType="cloudmanageModel.puerto_por_equipo" />
+          <EntitySet Name="rack" EntityType="cloudmanageModel.rack" />
+          <EntitySet Name="responsable" EntityType="cloudmanageModel.responsable" />
+          <EntitySet Name="software" EntityType="cloudmanageModel.software" />
+          <EntitySet Name="software_por_equipo" EntityType="cloudmanageModel.software_por_equipo" />
+          <EntitySet Name="tipo_dato" EntityType="cloudmanageModel.tipo_dato" />
+          <EntitySet Name="tipo_de_equipo" EntityType="cloudmanageModel.tipo_de_equipo" />
+          <EntitySet Name="tipo_de_software" EntityType="cloudmanageModel.tipo_de_software" />
+          <EntitySet Name="ubicacion" EntityType="cloudmanageModel.ubicacion" />
+          <AssociationSet Name="fk_atributo_por_equipo_atributo1" Association="cloudmanageModel.fk_atributo_por_equipo_atributo1">
+            <End Role="atributo" EntitySet="atributo" />
+            <End Role="atributo_por_equipo" EntitySet="atributo_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_DATO_ATRIBUTO" Association="cloudmanageModel.FK_TIPO_DATO_ATRIBUTO">
+            <End Role="tipo_dato" EntitySet="tipo_dato" />
+            <End Role="atributo" EntitySet="atributo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_atributo_por_equipo_equipo1" Association="cloudmanageModel.fk_atributo_por_equipo_equipo1">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="atributo_por_equipo" EntitySet="atributo_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compania_ciudad1" Association="cloudmanageModel.fk_compania_ciudad1">
+            <End Role="ciudad" EntitySet="ciudad" />
+            <End Role="compania" EntitySet="compania" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ubicacion_ciudad" Association="cloudmanageModel.fk_ubicacion_ciudad">
+            <End Role="ciudad" EntitySet="ciudad" />
+            <End Role="ubicacion" EntitySet="ubicacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compania_pais1" Association="cloudmanageModel.fk_compania_pais1">
+            <End Role="pais" EntitySet="pais" />
+            <End Role="compania" EntitySet="compania" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ubicacion_compania1" Association="cloudmanageModel.fk_ubicacion_compania1">
+            <End Role="compania" EntitySet="compania" />
+            <End Role="ubicacion" EntitySet="ubicacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_equipo_marcamodelo" Association="cloudmanageModel.fk_equipo_equipo_marcamodelo">
+            <End Role="marca_modelo" EntitySet="marca_modelo" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_por_rack_equipo1" Association="cloudmanageModel.fk_equipo_por_rack_equipo1">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="equipo_por_rack" EntitySet="equipo_por_rack" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_proveedor" Association="cloudmanageModel.fk_equipo_proveedor">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_responsable" Association="cloudmanageModel.fk_equipo_responsable">
+            <End Role="responsable" EntitySet="responsable" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_tipo_de_equipo1" Association="cloudmanageModel.fk_equipo_tipo_de_equipo1">
+            <End Role="tipo_de_equipo" EntitySet="tipo_de_equipo" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_ubicacion1" Association="cloudmanageModel.fk_equipo_ubicacion1">
+            <End Role="ubicacion" EntitySet="ubicacion" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puerto_por_equipo_equipo1" Association="cloudmanageModel.fk_puerto_por_equipo_equipo1">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="puerto_por_equipo" EntitySet="puerto_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_software_por_equipo_equipo1" Association="cloudmanageModel.fk_software_por_equipo_equipo1">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="software_por_equipo" EntitySet="software_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipo_por_rack_rack1" Association="cloudmanageModel.fk_equipo_por_rack_rack1">
+            <End Role="rack" EntitySet="rack" />
+            <End Role="equipo_por_rack" EntitySet="equipo_por_rack" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ubicacion_pais1" Association="cloudmanageModel.fk_ubicacion_pais1">
+            <End Role="pais" EntitySet="pais" />
+            <End Role="ubicacion" EntitySet="ubicacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rack_proveedor" Association="cloudmanageModel.fk_rack_proveedor">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="rack" EntitySet="rack" />
+          </AssociationSet>
+          <AssociationSet Name="fk_software_proveedor" Association="cloudmanageModel.fk_software_proveedor">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="software" EntitySet="software" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puerto_por_equipo_puerrto" Association="cloudmanageModel.fk_puerto_por_equipo_puerrto">
+            <End Role="puerto" EntitySet="puerto" />
+            <End Role="puerto_por_equipo" EntitySet="puerto_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rack_ubicacion1" Association="cloudmanageModel.fk_rack_ubicacion1">
+            <End Role="ubicacion" EntitySet="ubicacion" />
+            <End Role="rack" EntitySet="rack" />
+          </AssociationSet>
+          <AssociationSet Name="fk_software_por_equipo_software1" Association="cloudmanageModel.fk_software_por_equipo_software1">
+            <End Role="software" EntitySet="software" />
+            <End Role="software_por_equipo" EntitySet="software_por_equipo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_software_tipo_de_software1" Association="cloudmanageModel.fk_software_tipo_de_software1">
+            <End Role="tipo_de_software" EntitySet="tipo_de_software" />
+            <End Role="software" EntitySet="software" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="atributo">
+          <Key>
+            <PropertyRef Name="idatributo" />
+          </Key>
+          <Property Name="idatributo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_dato_fk" Type="Int32" Nullable="false" />
+          <Property Name="es_requerido" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="atributo_por_equipo" Relationship="cloudmanageModel.fk_atributo_por_equipo_atributo1" FromRole="atributo" ToRole="atributo_por_equipo" />
+          <NavigationProperty Name="tipo_dato" Relationship="cloudmanageModel.FK_TIPO_DATO_ATRIBUTO" FromRole="atributo" ToRole="tipo_dato" />
+        </EntityType>
+        <EntityType Name="atributo_por_equipo">
+          <Key>
+            <PropertyRef Name="atributo_fk" />
+            <PropertyRef Name="equipo_fk" />
+          </Key>
+          <Property Name="atributo_fk" Type="Int32" Nullable="false" />
+          <Property Name="equipo_fk" Type="Int32" Nullable="false" />
+          <Property Name="valor_atributo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="atributo" Relationship="cloudmanageModel.fk_atributo_por_equipo_atributo1" FromRole="atributo_por_equipo" ToRole="atributo" />
+          <NavigationProperty Name="equipo" Relationship="cloudmanageModel.fk_atributo_por_equipo_equipo1" FromRole="atributo_por_equipo" ToRole="equipo" />
+        </EntityType>
+        <EntityType Name="ciudad">
+          <Key>
+            <PropertyRef Name="idciudad" />
+          </Key>
+          <Property Name="idciudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="compania" Relationship="cloudmanageModel.fk_compania_ciudad1" FromRole="ciudad" ToRole="compania" />
+          <NavigationProperty Name="ubicacion" Relationship="cloudmanageModel.fk_ubicacion_ciudad" FromRole="ciudad" ToRole="ubicacion" />
+        </EntityType>
+        <EntityType Name="compania">
+          <Key>
+            <PropertyRef Name="idcompania" />
+          </Key>
+          <Property Name="idcompania" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pais_fk" Type="Int32" />
+          <Property Name="ciudad_fk" Type="Int32" />
+          <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ruc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ciudad" Relationship="cloudmanageModel.fk_compania_ciudad1" FromRole="compania" ToRole="ciudad" />
+          <NavigationProperty Name="pais" Relationship="cloudmanageModel.fk_compania_pais1" FromRole="compania" ToRole="pais" />
+          <NavigationProperty Name="ubicacion" Relationship="cloudmanageModel.fk_ubicacion_compania1" FromRole="compania" ToRole="ubicacion" />
+        </EntityType>
+        <EntityType Name="equipo">
+          <Key>
+            <PropertyRef Name="idequipo" />
+          </Key>
+          <Property Name="idequipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ubicacion_fk" Type="Int32" />
+          <Property Name="tipo_de_equipo_fk" Type="Int32" />
+          <Property Name="marca_modelo_fk" Type="Int32" />
+          <Property Name="s_equipo_numero_serie" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="altura_u" Type="Int32" />
+          <Property Name="prof_inch" Type="Int32" />
+          <Property Name="es_contenido" Type="SByte" Nullable="false" />
+          <Property Name="s_equipo_fecha_configuracion" Type="DateTime" Nullable="false" />
+          <Property Name="responsable_fk" Type="Int32" />
+          <Property Name="es_propio" Type="SByte" Nullable="false" />
+          <Property Name="comentarios" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="path_imagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="es_activo" Type="SByte" Nullable="false" />
+          <Property Name="es_virtual" Type="SByte" Nullable="false" />
+          <Property Name="proveedor_fk" Type="Int32" />
+          <NavigationProperty Name="atributo_por_equipo" Relationship="cloudmanageModel.fk_atributo_por_equipo_equipo1" FromRole="equipo" ToRole="atributo_por_equipo" />
+          <NavigationProperty Name="marca_modelo" Relationship="cloudmanageModel.fk_equipo_equipo_marcamodelo" FromRole="equipo" ToRole="marca_modelo" />
+          <NavigationProperty Name="equipo_por_rack" Relationship="cloudmanageModel.fk_equipo_por_rack_equipo1" FromRole="equipo" ToRole="equipo_por_rack" />
+          <NavigationProperty Name="proveedor" Relationship="cloudmanageModel.fk_equipo_proveedor" FromRole="equipo" ToRole="proveedor" />
+          <NavigationProperty Name="responsable" Relationship="cloudmanageModel.fk_equipo_responsable" FromRole="equipo" ToRole="responsable" />
+          <NavigationProperty Name="tipo_de_equipo" Relationship="cloudmanageModel.fk_equipo_tipo_de_equipo1" FromRole="equipo" ToRole="tipo_de_equipo" />
+          <NavigationProperty Name="ubicacion" Relationship="cloudmanageModel.fk_equipo_ubicacion1" FromRole="equipo" ToRole="ubicacion" />
+          <NavigationProperty Name="puerto_por_equipo" Relationship="cloudmanageModel.fk_puerto_por_equipo_equipo1" FromRole="equipo" ToRole="puerto_por_equipo" />
+          <NavigationProperty Name="software_por_equipo" Relationship="cloudmanageModel.fk_software_por_equipo_equipo1" FromRole="equipo" ToRole="software_por_equipo" />
+        </EntityType>
+        <EntityType Name="equipo_por_rack">
+          <Key>
+            <PropertyRef Name="equipo_fk" />
+            <PropertyRef Name="rack_fk" />
+          </Key>
+          <Property Name="equipo_fk" Type="Int32" Nullable="false" />
+          <Property Name="rack_fk" Type="Int32" Nullable="false" />
+          <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="inicia_u" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="equipo" Relationship="cloudmanageModel.fk_equipo_por_rack_equipo1" FromRole="equipo_por_rack" ToRole="equipo" />
+          <NavigationProperty Name="rack" Relationship="cloudmanageModel.fk_equipo_por_rack_rack1" FromRole="equipo_por_rack" ToRole="rack" />
+        </EntityType>
+        <EntityType Name="marca_modelo">
+          <Key>
+            <PropertyRef Name="idmarca_modelo" />
+          </Key>
+          <Property Name="idmarca_modelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marca" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="modelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="especificaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="equipo" Relationship="cloudmanageModel.fk_equipo_equipo_marcamodelo" FromRole="marca_modelo" ToRole="equipo" />
+        </EntityType>
+        <EntityType Name="pais">
+          <Key>
+            <PropertyRef Name="idpais" />
+          </Key>
+          <Property Name="idpais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="compania" Relationship="cloudmanageModel.fk_compania_pais1" FromRole="pais" ToRole="compania" />
+          <NavigationProperty Name="ubicacion" Relationship="cloudmanageModel.fk_ubicacion_pais1" FromRole="pais" ToRole="ubicacion" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="idproveedor" />
+          </Key>
+          <Property Name="idproveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_comercial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_contacto_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_contacto_1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_contacto_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_contacto_2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="email_soporte" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="equipo" Relationship="cloudmanageModel.fk_equipo_proveedor" FromRole="proveedor" ToRole="equipo" />
+          <NavigationProperty Name="rack" Relationship="cloudmanageModel.fk_rack_proveedor" FromRole="proveedor" ToRole="rack" />
+          <NavigationProperty Name="software" Relationship="cloudmanageModel.fk_software_proveedor" FromRole="proveedor" ToRole="software" />
+        </EntityType>
+        <EntityType Name="puerto">
+          <Key>
+            <PropertyRef Name="idpuerto" />
+          </Key>
+          <Property Name="idpuerto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="especificaciones" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="puerto_por_equipo" Relationship="cloudmanageModel.fk_puerto_por_equipo_puerrto" FromRole="puerto" ToRole="puerto_por_equipo" />
+        </EntityType>
+        <EntityType Name="puerto_por_equipo">
+          <Key>
+            <PropertyRef Name="equipo_fk" />
+            <PropertyRef Name="puerto_fk" />
+          </Key>
+          <Property Name="equipo_fk" Type="Int32" Nullable="false" />
+          <Property Name="puerto_fk" Type="Int32" Nullable="false" />
+          <Property Name="numero_de_puertos" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="equipo" Relationship="cloudmanageModel.fk_puerto_por_equipo_equipo1" FromRole="puerto_por_equipo" ToRole="equipo" />
+          <NavigationProperty Name="puerto" Relationship="cloudmanageModel.fk_puerto_por_equipo_puerrto" FromRole="puerto_por_equipo" ToRole="puerto" />
+        </EntityType>
+        <EntityType Name="rack">
+          <Key>
+            <PropertyRef Name="idrack" />
+          </Key>
+          <Property Name="idrack" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ubicacion_fk" Type="Int32" />
+          <Property Name="orden" Type="Int32" />
+          <Property Name="altura_u" Type="Int32" />
+          <Property Name="prof_inch" Type="Int32" />
+          <Property Name="proveedor_fk" Type="Int32" />
+          <NavigationProperty Name="equipo_por_rack" Relationship="cloudmanageModel.fk_equipo_por_rack_rack1" FromRole="rack" ToRole="equipo_por_rack" />
+          <NavigationProperty Name="proveedor" Relationship="cloudmanageModel.fk_rack_proveedor" FromRole="rack" ToRole="proveedor" />
+          <NavigationProperty Name="ubicacion" Relationship="cloudmanageModel.fk_rack_ubicacion1" FromRole="rack" ToRole="ubicacion" />
+        </EntityType>
+        <EntityType Name="responsable">
+          <Key>
+            <PropertyRef Name="idresponsable" />
+          </Key>
+          <Property Name="idresponsable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula_ruc" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="equipo" Relationship="cloudmanageModel.fk_equipo_responsable" FromRole="responsable" ToRole="equipo" />
+        </EntityType>
+        <EntityType Name="software">
+          <Key>
+            <PropertyRef Name="idsoftware" />
+          </Key>
+          <Property Name="idsoftware" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor_fk" Type="Int32" />
+          <Property Name="tipo_software_fk" Type="Int32" />
+          <Property Name="informacion_tecnica" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="configuraciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="es_activo" Type="SByte" Nullable="false" />
+          <Property Name="licencias_adquiridas" Type="Int32" />
+          <Property Name="licencias_instaladas" Type="Int32" />
+          <NavigationProperty Name="proveedor" Relationship="cloudmanageModel.fk_software_proveedor" FromRole="software" ToRole="proveedor" />
+          <NavigationProperty Name="software_por_equipo" Relationship="cloudmanageModel.fk_software_por_equipo_software1" FromRole="software" ToRole="software_por_equipo" />
+          <NavigationProperty Name="tipo_de_software" Relationship="cloudmanageModel.fk_software_tipo_de_software1" FromRole="software" ToRole="tipo_de_software" />
+        </EntityType>
+        <EntityType Name="software_por_equipo">
+          <Key>
+            <PropertyRef Name="equipo_fk" />
+            <PropertyRef Name="software_fk" />
+          </Key>
+          <Property Name="equipo_fk" Type="Int32" Nullable="false" />
+          <Property Name="software_fk" Type="Int32" Nullable="false" />
+          <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="equipo" Relationship="cloudmanageModel.fk_software_por_equipo_equipo1" FromRole="software_por_equipo" ToRole="equipo" />
+          <NavigationProperty Name="software" Relationship="cloudmanageModel.fk_software_por_equipo_software1" FromRole="software_por_equipo" ToRole="software" />
+        </EntityType>
+        <EntityType Name="tipo_dato">
+          <Key>
+            <PropertyRef Name="idtipo_dato" />
+          </Key>
+          <Property Name="idtipo_dato" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="formato_tabla" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="regex" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="atributo" Relationship="cloudmanageModel.FK_TIPO_DATO_ATRIBUTO" FromRole="tipo_dato" ToRole="atributo" />
+        </EntityType>
+        <EntityType Name="tipo_de_equipo">
+          <Key>
+            <PropertyRef Name="idtipo_de_equipo" />
+          </Key>
+          <Property Name="idtipo_de_equipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="equipo" Relationship="cloudmanageModel.fk_equipo_tipo_de_equipo1" FromRole="tipo_de_equipo" ToRole="equipo" />
+        </EntityType>
+        <EntityType Name="tipo_de_software">
+          <Key>
+            <PropertyRef Name="idtipo_de_software" />
+          </Key>
+          <Property Name="idtipo_de_software" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="software" Relationship="cloudmanageModel.fk_software_tipo_de_software1" FromRole="tipo_de_software" ToRole="software" />
+        </EntityType>
+        <EntityType Name="ubicacion">
+          <Key>
+            <PropertyRef Name="idubicacion" />
+          </Key>
+          <Property Name="idubicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="coordenadas" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_de_contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="telefono_de_contacto" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="celular_de_contacto" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="es_datacenter" Type="SByte" Nullable="false" />
+          <Property Name="es_cloud" Type="SByte" Nullable="false" />
+          <Property Name="compania_fk" Type="Int32" />
+          <Property Name="pais_fk" Type="Int32" />
+          <Property Name="ciudad_fk" Type="Int32" />
+          <Property Name="es_activo" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="ciudad" Relationship="cloudmanageModel.fk_ubicacion_ciudad" FromRole="ubicacion" ToRole="ciudad" />
+          <NavigationProperty Name="compania" Relationship="cloudmanageModel.fk_ubicacion_compania1" FromRole="ubicacion" ToRole="compania" />
+          <NavigationProperty Name="equipo" Relationship="cloudmanageModel.fk_equipo_ubicacion1" FromRole="ubicacion" ToRole="equipo" />
+          <NavigationProperty Name="pais" Relationship="cloudmanageModel.fk_ubicacion_pais1" FromRole="ubicacion" ToRole="pais" />
+          <NavigationProperty Name="rack" Relationship="cloudmanageModel.fk_rack_ubicacion1" FromRole="ubicacion" ToRole="rack" />
+        </EntityType>
+        <Association Name="fk_atributo_por_equipo_atributo1">
+          <End Type="cloudmanageModel.atributo" Role="atributo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cloudmanageModel.atributo_por_equipo" Role="atributo_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="atributo">
+              <PropertyRef Name="idatributo" />
+            </Principal>
+            <Dependent Role="atributo_por_equipo">
+              <PropertyRef Name="atributo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_DATO_ATRIBUTO">
+          <End Type="cloudmanageModel.tipo_dato" Role="tipo_dato" Multiplicity="1" />
+          <End Type="cloudmanageModel.atributo" Role="atributo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_dato">
+              <PropertyRef Name="idtipo_dato" />
+            </Principal>
+            <Dependent Role="atributo">
+              <PropertyRef Name="tipo_dato_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_atributo_por_equipo_equipo1">
+          <End Type="cloudmanageModel.equipo" Role="equipo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cloudmanageModel.atributo_por_equipo" Role="atributo_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="idequipo" />
+            </Principal>
+            <Dependent Role="atributo_por_equipo">
+              <PropertyRef Name="equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compania_ciudad1">
+          <End Type="cloudmanageModel.ciudad" Role="ciudad" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.compania" Role="compania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ciudad">
+              <PropertyRef Name="idciudad" />
+            </Principal>
+            <Dependent Role="compania">
+              <PropertyRef Name="ciudad_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ubicacion_ciudad">
+          <End Type="cloudmanageModel.ciudad" Role="ciudad" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.ubicacion" Role="ubicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ciudad">
+              <PropertyRef Name="idciudad" />
+            </Principal>
+            <Dependent Role="ubicacion">
+              <PropertyRef Name="ciudad_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compania_pais1">
+          <End Type="cloudmanageModel.pais" Role="pais" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.compania" Role="compania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pais">
+              <PropertyRef Name="idpais" />
+            </Principal>
+            <Dependent Role="compania">
+              <PropertyRef Name="pais_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ubicacion_compania1">
+          <End Type="cloudmanageModel.compania" Role="compania" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.ubicacion" Role="ubicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compania">
+              <PropertyRef Name="idcompania" />
+            </Principal>
+            <Dependent Role="ubicacion">
+              <PropertyRef Name="compania_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_equipo_marcamodelo">
+          <End Type="cloudmanageModel.marca_modelo" Role="marca_modelo" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.equipo" Role="equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marca_modelo">
+              <PropertyRef Name="idmarca_modelo" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="marca_modelo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_por_rack_equipo1">
+          <End Type="cloudmanageModel.equipo" Role="equipo" Multiplicity="1" />
+          <End Type="cloudmanageModel.equipo_por_rack" Role="equipo_por_rack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="idequipo" />
+            </Principal>
+            <Dependent Role="equipo_por_rack">
+              <PropertyRef Name="equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_proveedor">
+          <End Type="cloudmanageModel.proveedor" Role="proveedor" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.equipo" Role="equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="idproveedor" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="proveedor_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_responsable">
+          <End Type="cloudmanageModel.responsable" Role="responsable" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.equipo" Role="equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="responsable">
+              <PropertyRef Name="idresponsable" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="responsable_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_tipo_de_equipo1">
+          <End Type="cloudmanageModel.tipo_de_equipo" Role="tipo_de_equipo" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.equipo" Role="equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_de_equipo">
+              <PropertyRef Name="idtipo_de_equipo" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="tipo_de_equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_ubicacion1">
+          <End Type="cloudmanageModel.ubicacion" Role="ubicacion" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.equipo" Role="equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ubicacion">
+              <PropertyRef Name="idubicacion" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="ubicacion_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puerto_por_equipo_equipo1">
+          <End Type="cloudmanageModel.equipo" Role="equipo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cloudmanageModel.puerto_por_equipo" Role="puerto_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="idequipo" />
+            </Principal>
+            <Dependent Role="puerto_por_equipo">
+              <PropertyRef Name="equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_software_por_equipo_equipo1">
+          <End Type="cloudmanageModel.equipo" Role="equipo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cloudmanageModel.software_por_equipo" Role="software_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="idequipo" />
+            </Principal>
+            <Dependent Role="software_por_equipo">
+              <PropertyRef Name="equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipo_por_rack_rack1">
+          <End Type="cloudmanageModel.rack" Role="rack" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="cloudmanageModel.equipo_por_rack" Role="equipo_por_rack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rack">
+              <PropertyRef Name="idrack" />
+            </Principal>
+            <Dependent Role="equipo_por_rack">
+              <PropertyRef Name="rack_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ubicacion_pais1">
+          <End Type="cloudmanageModel.pais" Role="pais" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.ubicacion" Role="ubicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pais">
+              <PropertyRef Name="idpais" />
+            </Principal>
+            <Dependent Role="ubicacion">
+              <PropertyRef Name="pais_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rack_proveedor">
+          <End Type="cloudmanageModel.proveedor" Role="proveedor" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.rack" Role="rack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="idproveedor" />
+            </Principal>
+            <Dependent Role="rack">
+              <PropertyRef Name="proveedor_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_software_proveedor">
+          <End Type="cloudmanageModel.proveedor" Role="proveedor" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.software" Role="software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="idproveedor" />
+            </Principal>
+            <Dependent Role="software">
+              <PropertyRef Name="proveedor_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puerto_por_equipo_puerrto">
+          <End Type="cloudmanageModel.puerto" Role="puerto" Multiplicity="1" />
+          <End Type="cloudmanageModel.puerto_por_equipo" Role="puerto_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="puerto">
+              <PropertyRef Name="idpuerto" />
+            </Principal>
+            <Dependent Role="puerto_por_equipo">
+              <PropertyRef Name="puerto_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rack_ubicacion1">
+          <End Type="cloudmanageModel.ubicacion" Role="ubicacion" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.rack" Role="rack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ubicacion">
+              <PropertyRef Name="idubicacion" />
+            </Principal>
+            <Dependent Role="rack">
+              <PropertyRef Name="ubicacion_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_software_por_equipo_software1">
+          <End Type="cloudmanageModel.software" Role="software" Multiplicity="1" />
+          <End Type="cloudmanageModel.software_por_equipo" Role="software_por_equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="software">
+              <PropertyRef Name="idsoftware" />
+            </Principal>
+            <Dependent Role="software_por_equipo">
+              <PropertyRef Name="software_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_software_tipo_de_software1">
+          <End Type="cloudmanageModel.tipo_de_software" Role="tipo_de_software" Multiplicity="0..1" />
+          <End Type="cloudmanageModel.software" Role="software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_de_software">
+              <PropertyRef Name="idtipo_de_software" />
+            </Principal>
+            <Dependent Role="software">
+              <PropertyRef Name="tipo_software_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cloudmanageModelStoreContainer" CdmEntityContainer="cloudmanageEntities">
+          <EntitySetMapping Name="atributo">
+            <EntityTypeMapping TypeName="cloudmanageModel.atributo">
+              <MappingFragment StoreEntitySet="atributo">
+                <ScalarProperty Name="es_requerido" ColumnName="es_requerido" />
+                <ScalarProperty Name="tipo_dato_fk" ColumnName="tipo_dato_fk" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idatributo" ColumnName="idatributo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="atributo_por_equipo">
+            <EntityTypeMapping TypeName="cloudmanageModel.atributo_por_equipo">
+              <MappingFragment StoreEntitySet="atributo_por_equipo">
+                <ScalarProperty Name="valor_atributo" ColumnName="valor_atributo" />
+                <ScalarProperty Name="equipo_fk" ColumnName="equipo_fk" />
+                <ScalarProperty Name="atributo_fk" ColumnName="atributo_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ciudad">
+            <EntityTypeMapping TypeName="cloudmanageModel.ciudad">
+              <MappingFragment StoreEntitySet="ciudad">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idciudad" ColumnName="idciudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="compania">
+            <EntityTypeMapping TypeName="cloudmanageModel.compania">
+              <MappingFragment StoreEntitySet="compania">
+                <ScalarProperty Name="ruc" ColumnName="ruc" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="ciudad_fk" ColumnName="ciudad_fk" />
+                <ScalarProperty Name="pais_fk" ColumnName="pais_fk" />
+                <ScalarProperty Name="contacto" ColumnName="contacto" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idcompania" ColumnName="idcompania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipo">
+            <EntityTypeMapping TypeName="cloudmanageModel.equipo">
+              <MappingFragment StoreEntitySet="equipo">
+                <ScalarProperty Name="proveedor_fk" ColumnName="proveedor_fk" />
+                <ScalarProperty Name="es_virtual" ColumnName="es_virtual" />
+                <ScalarProperty Name="es_activo" ColumnName="es_activo" />
+                <ScalarProperty Name="path_imagen" ColumnName="path_imagen" />
+                <ScalarProperty Name="comentarios" ColumnName="comentarios" />
+                <ScalarProperty Name="es_propio" ColumnName="es_propio" />
+                <ScalarProperty Name="responsable_fk" ColumnName="responsable_fk" />
+                <ScalarProperty Name="s_equipo_fecha_configuracion" ColumnName="s_equipo_fecha_configuracion" />
+                <ScalarProperty Name="es_contenido" ColumnName="es_contenido" />
+                <ScalarProperty Name="prof_inch" ColumnName="prof_inch" />
+                <ScalarProperty Name="altura_u" ColumnName="altura_u" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="s_equipo_numero_serie" ColumnName="s_equipo_numero_serie" />
+                <ScalarProperty Name="marca_modelo_fk" ColumnName="marca_modelo_fk" />
+                <ScalarProperty Name="tipo_de_equipo_fk" ColumnName="tipo_de_equipo_fk" />
+                <ScalarProperty Name="ubicacion_fk" ColumnName="ubicacion_fk" />
+                <ScalarProperty Name="idequipo" ColumnName="idequipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipo_por_rack">
+            <EntityTypeMapping TypeName="cloudmanageModel.equipo_por_rack">
+              <MappingFragment StoreEntitySet="equipo_por_rack">
+                <ScalarProperty Name="inicia_u" ColumnName="inicia_u" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="rack_fk" ColumnName="rack_fk" />
+                <ScalarProperty Name="equipo_fk" ColumnName="equipo_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marca_modelo">
+            <EntityTypeMapping TypeName="cloudmanageModel.marca_modelo">
+              <MappingFragment StoreEntitySet="marca_modelo">
+                <ScalarProperty Name="especificaciones" ColumnName="especificaciones" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="idmarca_modelo" ColumnName="idmarca_modelo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pais">
+            <EntityTypeMapping TypeName="cloudmanageModel.pais">
+              <MappingFragment StoreEntitySet="pais">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idpais" ColumnName="idpais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proveedor">
+            <EntityTypeMapping TypeName="cloudmanageModel.proveedor">
+              <MappingFragment StoreEntitySet="proveedor">
+                <ScalarProperty Name="email_soporte" ColumnName="email_soporte" />
+                <ScalarProperty Name="telefono_contacto_2" ColumnName="telefono_contacto_2" />
+                <ScalarProperty Name="nombre_contacto_2" ColumnName="nombre_contacto_2" />
+                <ScalarProperty Name="telefono_contacto_1" ColumnName="telefono_contacto_1" />
+                <ScalarProperty Name="nombre_contacto_1" ColumnName="nombre_contacto_1" />
+                <ScalarProperty Name="nombre_comercial" ColumnName="nombre_comercial" />
+                <ScalarProperty Name="idproveedor" ColumnName="idproveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="puerto">
+            <EntityTypeMapping TypeName="cloudmanageModel.puerto">
+              <MappingFragment StoreEntitySet="puerto">
+                <ScalarProperty Name="especificaciones" ColumnName="especificaciones" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idpuerto" ColumnName="idpuerto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="puerto_por_equipo">
+            <EntityTypeMapping TypeName="cloudmanageModel.puerto_por_equipo">
+              <MappingFragment StoreEntitySet="puerto_por_equipo">
+                <ScalarProperty Name="numero_de_puertos" ColumnName="numero_de_puertos" />
+                <ScalarProperty Name="puerto_fk" ColumnName="puerto_fk" />
+                <ScalarProperty Name="equipo_fk" ColumnName="equipo_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rack">
+            <EntityTypeMapping TypeName="cloudmanageModel.rack">
+              <MappingFragment StoreEntitySet="rack">
+                <ScalarProperty Name="proveedor_fk" ColumnName="proveedor_fk" />
+                <ScalarProperty Name="prof_inch" ColumnName="prof_inch" />
+                <ScalarProperty Name="altura_u" ColumnName="altura_u" />
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="ubicacion_fk" ColumnName="ubicacion_fk" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="idrack" ColumnName="idrack" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="responsable">
+            <EntityTypeMapping TypeName="cloudmanageModel.responsable">
+              <MappingFragment StoreEntitySet="responsable">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cedula_ruc" ColumnName="cedula_ruc" />
+                <ScalarProperty Name="idresponsable" ColumnName="idresponsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="software">
+            <EntityTypeMapping TypeName="cloudmanageModel.software">
+              <MappingFragment StoreEntitySet="software">
+                <ScalarProperty Name="licencias_instaladas" ColumnName="licencias_instaladas" />
+                <ScalarProperty Name="licencias_adquiridas" ColumnName="licencias_adquiridas" />
+                <ScalarProperty Name="es_activo" ColumnName="es_activo" />
+                <ScalarProperty Name="configuraciones" ColumnName="configuraciones" />
+                <ScalarProperty Name="informacion_tecnica" ColumnName="informacion_tecnica" />
+                <ScalarProperty Name="tipo_software_fk" ColumnName="tipo_software_fk" />
+                <ScalarProperty Name="proveedor_fk" ColumnName="proveedor_fk" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idsoftware" ColumnName="idsoftware" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="software_por_equipo">
+            <EntityTypeMapping TypeName="cloudmanageModel.software_por_equipo">
+              <MappingFragment StoreEntitySet="software_por_equipo">
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="software_fk" ColumnName="software_fk" />
+                <ScalarProperty Name="equipo_fk" ColumnName="equipo_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_dato">
+            <EntityTypeMapping TypeName="cloudmanageModel.tipo_dato">
+              <MappingFragment StoreEntitySet="tipo_dato">
+                <ScalarProperty Name="regex" ColumnName="regex" />
+                <ScalarProperty Name="formato_tabla" ColumnName="formato_tabla" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idtipo_dato" ColumnName="idtipo_dato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_de_equipo">
+            <EntityTypeMapping TypeName="cloudmanageModel.tipo_de_equipo">
+              <MappingFragment StoreEntitySet="tipo_de_equipo">
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="idtipo_de_equipo" ColumnName="idtipo_de_equipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_de_software">
+            <EntityTypeMapping TypeName="cloudmanageModel.tipo_de_software">
+              <MappingFragment StoreEntitySet="tipo_de_software">
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="idtipo_de_software" ColumnName="idtipo_de_software" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ubicacion">
+            <EntityTypeMapping TypeName="cloudmanageModel.ubicacion">
+              <MappingFragment StoreEntitySet="ubicacion">
+                <ScalarProperty Name="es_activo" ColumnName="es_activo" />
+                <ScalarProperty Name="ciudad_fk" ColumnName="ciudad_fk" />
+                <ScalarProperty Name="pais_fk" ColumnName="pais_fk" />
+                <ScalarProperty Name="compania_fk" ColumnName="compania_fk" />
+                <ScalarProperty Name="es_cloud" ColumnName="es_cloud" />
+                <ScalarProperty Name="es_datacenter" ColumnName="es_datacenter" />
+                <ScalarProperty Name="celular_de_contacto" ColumnName="celular_de_contacto" />
+                <ScalarProperty Name="telefono_de_contacto" ColumnName="telefono_de_contacto" />
+                <ScalarProperty Name="nombre_de_contacto" ColumnName="nombre_de_contacto" />
+                <ScalarProperty Name="coordenadas" ColumnName="coordenadas" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idubicacion" ColumnName="idubicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

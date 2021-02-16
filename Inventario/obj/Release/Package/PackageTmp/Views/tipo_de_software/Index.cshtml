@@ -1,0 +1,44 @@
+﻿@model PagedList.IPagedList<Inventario.Models.tipo_de_software>
+    @using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="font-weight:bold">Tipo de software</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr class="blackImportant">
+        <th>
+            Categoría
+        </th>
+        <th>
+            @using (Html.BeginForm())
+            {
+                <div style="display:inline-block">
+                    @Html.TextBox("searchString", null, new { @class = "resizedTextbox" })
+                    <input id="buscarSubmit" type="submit" class="lupaImage" value="Buscar" />   @* btn btn-primary *@
+                    <button class="cancelarImage" onclick="clean();"> X </button>
+                </div>
+
+            }
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.categoria)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.idtipo_de_software }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Ver", "Details", new { id = item.idtipo_de_software }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Borrar", "Delete", new { id = item.idtipo_de_software }, new { @class = "btn btn-primary" })
+        </td>
+    </tr>
+}
+
+</table>

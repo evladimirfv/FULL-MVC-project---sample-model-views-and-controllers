@@ -1,0 +1,44 @@
+﻿@using Inventario.Models;
+@model Inventario.Models.rack
+
+
+
+@{
+    Layout = null;
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/custom")
+
+}
+
+
+@{
+    List<equipo> equiposRack = (List<equipo>)ViewBag.equiposRack;
+}
+
+
+<!doctype html>
+<html>
+<head>
+
+</head>
+<body onload="init();">
+
+    @*<p> Rack Id:  @Model.idrack  Este rack tiene @Model.equipo_por_rack.Count equipos </p>*@
+  
+    <canvas id="myCanvas" style="margin-left:100px" width="400" height="1200"></canvas>
+
+</body>
+</html>
+
+
+<script>
+    var _altura = '@Model.altura_u';
+    var _equipos = @Html.Raw(Json.Encode(equiposRack));
+
+    drawNow(_altura,_equipos);
+</script>

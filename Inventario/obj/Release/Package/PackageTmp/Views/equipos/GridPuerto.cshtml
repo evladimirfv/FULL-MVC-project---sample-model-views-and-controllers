@@ -1,0 +1,117 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@{
+
+    var test = ViewBag.puertos;
+
+
+
+}
+
+
+
+@model IEnumerable<Inventario.Models.puerto_por_equipo>
+
+@{
+    var modelo = new List<Inventario.Models.puerto_por_equipo>();
+    var nextEquipoId = ViewBag.nextEquipoId;
+}
+
+
+
+@(Html.Kendo().Grid(Model)
+    .Name("gridPuerto")
+    .EnableCustomBinding(true)
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.equipo_fk).Hidden();
+        columns.Bound(p => p.puerto_fk).Hidden(); /*.EditorTemplateName("ClientSoftware").ClientTemplate("#= puerto_fk#");*/
+        columns.Bound(p => p.puerto_por_equipo_unique_id).Hidden();
+
+        columns.Bound(p => p.puerto_nombre).Width(100).Title("Puerto").EditorTemplateName("ClientPuerto").ClientTemplate("#= puerto_nombre#");
+
+        columns.Bound(p => p.numero_de_puertos).Title("Número puertos").Width(100);
+
+        columns.Command(command =>
+        { command.Edit().Text(" "); command.Destroy().Text(" "); }).Title(" ").Width(150);
+    })
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("Continue to delete this record?").DisplayDeleteConfirmation("Continue to delete this record?"))
+    .Events(e => e.Edit("editPuerto"))
+    .Pageable()
+    //.AutoBind(false)
+    .Sortable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:250px;width:450px" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Events(events => events.Error("error_handler"))
+        .Model(
+            model =>
+            {
+                model.Field(p => p.equipo_fk);
+                model.Field(p => p.puerto_fk);
+                model.Field(p => p.puerto_nombre);
+                model.Field(p => p.numero_de_puertos);
+                model.Id(p => p.puerto_por_equipo_unique_id);
+
+
+
+                //model.Field(p => p.software).DefaultValue(ViewData["defaultSoftware"] as Inventario.Models.software);
+            }
+
+        )
+        .Create(update => update.Action("EditingInline_Create_Puerto", "equipos"))
+        .Read(read => read.Action("EditingInline_Read_Puerto", "equipos"))
+        .Update(update => update.Action("EditingInline_Update_Puerto", "equipos"))
+        .Destroy(update => update.Action("EditingInline_Destroy_Puerto", "equipos"))
+    )
+)
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
+
+<script>
+    function onRequestStart(e) {
+        if (e.type === "read" && $("#Id").val() === "0") {
+            e.preventDefault();
+
+        }
+
+    }
+</script>
+
+
+<script>
+    function editPuerto(e) {
+        if (e.model.isNew() == false) {
+            var i = 2;
+            var columna = $('[name="puerto_nombre"]').data("kendoDropDownList");
+            var sfkmodelval = e.model.puerto_fk;
+
+            // Get current software_fk value
+            $('[name="puerto_nombre"]').data("kendoDropDownList").value(sfkmodelval);
+            var currentVal = columna.val;
+            columna.enable(false);
+            //    $('[name="software_nombre"]').val(3).change();
+        }
+    }
+</script>

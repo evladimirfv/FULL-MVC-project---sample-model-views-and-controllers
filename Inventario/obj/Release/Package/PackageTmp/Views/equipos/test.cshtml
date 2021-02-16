@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Kendo UI Snippet</title>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default-v2.min.css" />
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+</head>
+<body>
+
+
+    <div id="example">
+        <div id="grid"></div>
+
+        <script>
+        $(document).ready(function () {
+          
+
+          $("#grid").kendoGrid({
+            save:function(){
+              this.hideColumn(2);
+            },
+            cancel:function(){
+              this.hideColumn(2);
+            },
+            beforeEdit:function(){
+              this.showColumn(2);
+            }
+          
+          });
+        });
+
+      
+        </script>
+    </div>
+</body>
+</html>

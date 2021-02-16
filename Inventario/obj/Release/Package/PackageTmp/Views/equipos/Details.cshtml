@@ -1,0 +1,154 @@
+﻿@using Inventario.Views
+@model Inventario.Models.equipo
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h4 style="font-weight:bold">Equipo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ubicación
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ubicacion.nombre)
+        </dd>
+
+        <dt>
+            Categoría
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_de_equipo.categoria)
+        </dd>
+
+
+
+        <dt>
+            Serial
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s_equipo_numero_serie)
+        </dd>
+
+        <dt>
+            Modelo
+        </dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.marca_modelo.modelo)
+        </dd>
+
+        <dt>
+            Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+
+
+        <dt>
+            Altura (U)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.altura_u)
+        </dd>
+
+        <dt>
+            Profundidad (inch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prof_inch)
+        </dd>
+
+        @*<dt>
+                Contenedor
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.es_contenedor)
+            </dd>*@
+
+        <dt>
+            Fecha configuración
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.s_equipo_fecha_configuracion)
+        </dd>
+
+        <dt>
+            Propio
+        </dt>
+
+        <dd>
+            @Html.CheckBoxIntFor(model => model.es_propio, new { htmlAttributes = new { @class = "form-control" } }, "true")
+        </dd>
+
+        <dt>
+            Comentarios
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentarios)
+        </dd>
+
+        @*<dt>
+                Path imagen
+            </dt>*@
+
+        @*<dd>
+                @Html.DisplayFor(model => model.path_imagen)
+            </dd>*@
+
+        <dt>
+            Activo
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.es_activo)*@
+
+            @Html.CheckBoxIntFor(model => model.es_activo, new { htmlAttributes = new { @class = "form-control" } }, "true")
+        </dd>
+
+        <dt>
+            Virtual
+        </dt>
+
+        <dd>
+            @Html.CheckBoxIntFor(model => model.es_virtual, new { htmlAttributes = new { @class = "form-control" } }, "true")
+        </dd>
+
+
+
+        <dt>
+            Responsable
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.responsable.nombre)
+        </dd>
+
+
+
+
+    </dl>
+</div>
+
+<div class="col-md-offset-1" style="width:300px!important;display:inline-block!important;">
+    @Html.ActionLink("Listado", "Index", null, new { @class = "btn btn-primary btn-lg" })
+    @*<div class="divider"></div>*@
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idequipo }, new { @class = "btn btn-primary btn-lg" })
+</div>

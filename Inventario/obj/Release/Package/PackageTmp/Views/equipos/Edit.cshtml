@@ -1,0 +1,358 @@
+﻿@using Inventario.Views
+@model Inventario.Models.equipo
+
+
+
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@*<h2>Edit</h2>*@
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal left-half">
+    <h4 style="font-weight:bold">Modificar Equipo</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.idequipo)
+
+
+    @*<div class="form-group">
+        ID EQUIPO TEMPORALMENTE MOSTRADO :  @Model.idequipo
+    </div>*@
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ubicacion_fk, "Ubicación", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ubicacion_fk", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ubicacion_fk, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tipo_de_equipo_fk, "Tipo de equipo", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("tipo_de_equipo_fk", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tipo_de_equipo_fk, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.marca_modelo_fk, "Modelo", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("marca_modelo_fk", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.marca_modelo_fk, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.s_equipo_numero_serie, "Número serial", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.s_equipo_numero_serie, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+            @Html.ValidationMessageFor(model => model.s_equipo_numero_serie, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.descripcion, "Descripción", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.altura_u, "Altura (U)", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.altura_u, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.altura_u, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.prof_inch, "Profundidad (Inch)", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.prof_inch, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.prof_inch, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.es_contenedor, "Contenedor", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.es_contenedor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.es_contenedor, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.s_equipo_fecha_configuracion, "Fecha configuración", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DisplayFor(model => model.s_equipo_fecha_configuracion, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control" } })*@
+
+            @Html.EditorFor(model => model.s_equipo_fecha_configuracion, "{0:yyyy/MM/dd}", new { htmlAttributes = new { @class = "form-control" } })
+
+            @*@Html.EditorFor(model => model.Property, new { htmlAttributes = new { @Value = @Model.Property.ToString("yyyy-MM-dd"), @class = "customclass" } })*@
+
+
+
+            @Html.ValidationMessageFor(model => model.s_equipo_fecha_configuracion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.responsable_fk, "Responsable", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("responsable_fk", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.responsable_fk, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.es_propio, "Propio", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.CheckBoxIntFor(model => model.es_propio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.es_propio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.comentarios, "Comentarios", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.comentarios, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.comentarios, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.path_imagen, "Path Imagen", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.path_imagen, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.path_imagen, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.es_activo, "Activo", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.CheckBoxIntFor(model => model.es_activo, new { htmlAttributes = new { @class = "form-control" } })
+
+            @Html.ValidationMessageFor(model => model.es_activo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.es_virtual, "Virtual", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.CheckBoxIntFor(model => model.es_virtual, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.es_virtual, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.proveedor_fk, "Proveedor", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("proveedor_fk", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.proveedor_fk, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    @{
+
+        Dictionary<int, string> rxD = (Dictionary<int, string>)ViewBag.regexDict;
+        Dictionary<int, string> tdD = (Dictionary<int, string>)ViewBag.tipoDatoDict;
+        Dictionary<int, string> tdInputD = (Dictionary<int, string>)ViewBag.tipoDatoInputDict;
+
+
+
+        string GetRequired(sbyte expression)
+        {
+            if (expression == 1)
+                return "data-val-required=obligatorio";
+            else
+                return "";
+        }
+
+    }
+
+
+
+
+    @for (int i = 0; i < ViewBag.listaAtributos.Count; i++)
+    {
+
+
+        <div class="form-group">
+
+            <label class="control-label col-md-2" for="">
+                @ViewBag.listaAtributos[i].nombre
+            </label>
+
+
+
+            @if (Model.atributo_por_equipo.ToArray().Count() > i)
+            {
+                <div class="col-md-10">
+
+                    <input class="form-control text-box single-line"
+                           id="atributo_por_equipo[@i].valor_atributo"
+                           name="atributo_por_equipo[@i].valor_atributo"
+                           type="@tdInputD[ViewBag.listaAtributos[i].tipo_dato_fk]"
+                           value="@Model.atributo_por_equipo.ToArray()[i].valor_atributo"
+                           pattern="@rxD[ViewBag.listaAtributos[i].tipo_dato_fk]"
+                           data-val="true"
+                           @GetRequired(ViewBag.listaAtributos[i].es_requerido)
+                           data-val-regex="El tipo de dato del campo es @tdD[ViewBag.listaAtributos[i].tipo_dato_fk]"
+                           data-val-regex-pattern="@rxD[ViewBag.listaAtributos[i].tipo_dato_fk]">
+
+                    <span class="field-validation-valid text-danger"
+                          data-valmsg-for="atributo_por_equipo[@i].valor_atributo"
+                          data-valmsg-replace="true"></span>
+
+                </div>
+
+            }
+            else
+            {
+                <div class="col-md-10">
+
+                    <input class="form-control text-box single-line"
+                           id="atributo_por_equipo[@i].valor_atributo"
+                           name="atributo_por_equipo[@i].valor_atributo"
+                           type="text"
+                           value=""
+                           pattern="@rxD[ViewBag.listaAtributos[i].tipo_dato_fk]"
+                           data-val="true"
+                           @GetRequired(ViewBag.listaAtributos[i].es_requerido)
+                           data-val-regex="El tipo de dato del campo es @tdD[ViewBag.listaAtributos[i].tipo_dato_fk]"
+                           data-val-regex-pattern="@rxD[ViewBag.listaAtributos[i].tipo_dato_fk]">
+
+                    <span class="field-validation-valid text-danger"
+                          data-valmsg-for="atributo_por_equipo[@i].valor_atributo"
+                          data-valmsg-replace="true"></span>
+
+                </div>
+            }
+
+
+            <div class="col-md-10">
+                <input class=""
+                       id="atributo_por_equipo[@i].atributo_fk"
+                       name="atributo_por_equipo[@i].atributo_fk" type="hidden" value="@ViewBag.listaAtributos[i].idatributo">           @*atributo_por_equipo[@i].atributo_fk*@
+                </div>
+
+                <div class="col-md-10">
+                    <input class=""
+                           id="atributo_por_equipo[@i].equipo_fk"
+                           name="atributo_por_equipo[@i].equipo_fk" type="hidden" value="@Model.idequipo">
+                </div>
+
+
+            </div>
+
+        }
+
+
+
+
+
+    <div class="mb-4" style="margin-top:20px;margin-bottom:40px;">
+        <div class="col-md-offset-3 col-md-6">
+
+            @Html.ActionLink("Listado", "Index", null, new { @class = "btn btn-primary btn-lg" })
+            @*<div class="divider"></div>*@
+            <input type="submit" value="Guardar" class="btn btn-primary btn-lg" />
+
+
+
+        </div>
+
+    </div>
+
+
+    <div class="col-xs-12" style="height:50px;"></div>
+
+</div>
+
+
+   
+      
+  
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@*<script type="text/javascript">
+        $('input[id$=s_equipo_fecha_configuracion]').datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+    </script>*@
+
+
+<div class="right-half">
+
+    <h4 style="font-weight:bold">Software por equipo </h4>
+    <hr />
+    <div class="form-group">
+        <div class="col-md-10">
+
+
+
+            @{Html.RenderPartial("GridSoftware", new List<Inventario.Models.software_por_equipo>());}
+
+
+        </div>
+    </div>
+
+ </div>
+
+
+ <div class="right-half">
+    <div class="col-xs-12" style="height:20px"> </div>
+
+    <h4 style="font-weight:bold">Puertos por equipo </h4>
+     <hr/>
+    <div class="form-group">
+        <div class="col-md-10">
+
+
+
+            @{Html.RenderPartial("GridPuerto", new List<Inventario.Models.puerto_por_equipo>());}
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<style>
+    .left-half {
+        background-color: transparent;
+        float: left;
+        width: 48%;
+    }
+
+    .right-half {
+        background-color: transparent;
+        float: left;
+        width: 40%;
+    }
+</style>

@@ -1,0 +1,120 @@
+﻿@model Inventario.Models.ubicacion
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ubicacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.coordenadas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.coordenadas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_de_contacto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_de_contacto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono_de_contacto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono_de_contacto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.celular_de_contacto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.celular_de_contacto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.es_datacenter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.es_datacenter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.es_cloud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.es_cloud)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.es_activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.es_activo)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ciudad.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ciudad.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.compania.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.compania.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pais.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pais.nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,42 @@
+﻿@model Inventario.Models.puerto_por_equipo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h4>puerto_por_equipo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.numero_de_puertos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero_de_puertos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.equipo.s_equipo_numero_serie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.equipo.s_equipo_numero_serie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.puerto.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.puerto.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

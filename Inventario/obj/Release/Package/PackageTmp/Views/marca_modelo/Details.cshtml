@@ -1,0 +1,42 @@
+﻿@model Inventario.Models.marca_modelo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h4>marca_modelo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.especificaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.especificaciones)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idmarca_modelo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

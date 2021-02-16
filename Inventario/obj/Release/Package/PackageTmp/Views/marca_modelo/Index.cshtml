@@ -1,0 +1,56 @@
+﻿@model PagedList.IPagedList<Inventario.Models.marca_modelo>
+@using PagedList.Mvc;
+ 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="font-weight:bold">Marca y modelo de equipo</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr class="blackImportant">
+        <th>
+            Marca
+        </th>
+        <th>
+            Modelo
+        </th>
+        <th>
+            Especificaciones
+        </th>
+        <th>
+            @using (Html.BeginForm())
+            {
+                <div style="display:inline-block">
+                    @Html.TextBox("searchString", null, new { @class = "resizedTextbox" })
+                    <input id="buscarSubmit" type="submit" class="lupaImage" value="Buscar" />   @* btn btn-primary *@
+                    <button class="cancelarImage" onclick="clean();"> X </button>
+                </div>
+
+            }
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.marca)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.modelo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.especificaciones)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.idmarca_modelo }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Ver", "Details", new { id = item.idmarca_modelo }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Borrar", "Delete", new { id = item.idmarca_modelo }, new { @class = "btn btn-primary" })
+    </td>
+</tr>
+}
+
+</table>

@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="cloudmanageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="atributo">
+    <Key>
+      <PropertyRef Name="idatributo" />
+    </Key>
+    <Property Name="idatributo" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="valor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="equipo" Relationship="Self.FK_atributo_dispositivo" FromRole="atributo" ToRole="equipo" />
+  </EntityType>
+  <EntityType Name="ciudad">
+    <Key>
+      <PropertyRef Name="idciudad" />
+    </Key>
+    <Property Name="idciudad" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="compania">
+    <Key>
+      <PropertyRef Name="idcompania" />
+    </Key>
+    <Property Name="idcompania" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="celular" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pais_fk" Type="Int32" />
+    <Property Name="ciudad_fk" Type="Int32" />
+    <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ruc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ubicacion" Relationship="Self.FK_location_company" FromRole="compania" ToRole="ubicacion" />
+  </EntityType>
+  <EntityType Name="equipo">
+    <Key>
+      <PropertyRef Name="idequipo" />
+    </Key>
+    <Property Name="idequipo" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="modelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="marca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="informacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="alto" Type="Decimal" />
+    <Property Name="anrcho" Type="Decimal" />
+    <Property Name="profundidad" Type="Decimal" />
+    <Property Name="es_contenedor" Type="SByte" />
+    <Property Name="path_imagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="es_activo" Type="SByte" />
+    <Property Name="es_virtual" Type="SByte" />
+    <NavigationProperty Name="atributo" Relationship="Self.FK_atributo_dispositivo" FromRole="equipo" ToRole="atributo" />
+    <NavigationProperty Name="tipo_de_equipo" Relationship="Self.FK_device_devicetype" FromRole="equipo" ToRole="tipo_de_equipo" />
+    <NavigationProperty Name="puerto_por_equipo" Relationship="Self.FK_puerto_por_equipo_equipo" FromRole="equipo" ToRole="puerto_por_equipo" />
+    <NavigationProperty Name="software_device" Relationship="Self.FK_software_device_device" FromRole="equipo" ToRole="software_device" />
+  </EntityType>
+  <EntityType Name="equipo_por_rack">
+    <Key>
+      <PropertyRef Name="idequipo_por_rack" />
+      <PropertyRef Name="equipo_fk" />
+      <PropertyRef Name="s_equipo_serial_num" />
+    </Key>
+    <Property Name="idequipo_por_rack" Type="Int32" Nullable="false" />
+    <Property Name="equipo_fk" Type="Int32" Nullable="false" />
+    <Property Name="s_equipo_serial_num" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="s_equipo_fecha_configuracion" Type="DateTime" />
+    <Property Name="es_activo" Type="SByte" />
+    <Property Name="es_virtual" Type="SByte" />
+    <Property Name="responsable_fk" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="es_propio" Type="SByte" />
+    <Property Name="comentarios" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="rack" Relationship="Self.FK_device_rack_rack" FromRole="equipo_por_rack" ToRole="rack" />
+  </EntityType>
+  <EntityType Name="pais">
+    <Key>
+      <PropertyRef Name="idpais" />
+    </Key>
+    <Property Name="idpais" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="puerto">
+    <Key>
+      <PropertyRef Name="idpuerto" />
+    </Key>
+    <Property Name="idpuerto" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="especificaciones" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="puerto_por_equipo" Relationship="Self.FK_puerto_por_equipo_puerto" FromRole="puerto" ToRole="puerto_por_equipo" />
+  </EntityType>
+  <EntityType Name="puerto_por_equipo">
+    <Key>
+      <PropertyRef Name="idpuerto_por_equipo" />
+    </Key>
+    <Property Name="idpuerto_por_equipo" Type="Int32" Nullable="false" />
+    <Property Name="numero_de_puertos" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="equipo" Relationship="Self.FK_puerto_por_equipo_equipo" FromRole="puerto_por_equipo" ToRole="equipo" />
+    <NavigationProperty Name="puerto" Relationship="Self.FK_puerto_por_equipo_puerto" FromRole="puerto_por_equipo" ToRole="puerto" />
+  </EntityType>
+  <EntityType Name="rack">
+    <Key>
+      <PropertyRef Name="idrack" />
+    </Key>
+    <Property Name="idrack" Type="Int32" Nullable="false" />
+    <Property Name="s_code" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="s_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="i_order" Type="Int32" />
+    <Property Name="i_altura_u" Type="Int32" />
+    <Property Name="i_prof_inch" Type="Int32" />
+    <NavigationProperty Name="equipo_por_rack" Relationship="Self.FK_device_rack_rack" FromRole="rack" ToRole="equipo_por_rack" />
+    <NavigationProperty Name="ubicacion" Relationship="Self.FK_module_location" FromRole="rack" ToRole="ubicacion" />
+  </EntityType>
+  <EntityType Name="software">
+    <Key>
+      <PropertyRef Name="idsoftware" />
+    </Key>
+    <Property Name="idsoftware" Type="Int32" Nullable="false" />
+    <Property Name="s_software_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="s_version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="s_software_code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="s_provider" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="software_type_fk" Type="Int32" />
+    <Property Name="s_technical_info" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="s_configurations" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="b_is_active" Type="SByte" />
+    <Property Name="i_licences_acq_number" Type="Int32" />
+    <Property Name="i_installed_licences" Type="Int32" />
+    <NavigationProperty Name="software_device" Relationship="Self.FK_software_device_software" FromRole="software" ToRole="software_device" />
+  </EntityType>
+  <EntityType Name="software_device">
+    <Key>
+      <PropertyRef Name="idsoftware_device" />
+    </Key>
+    <Property Name="idsoftware_device" Type="Int32" Nullable="false" />
+    <Property Name="s_software_version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="s_device_serial_num" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="b_is_active" Type="SByte" />
+    <NavigationProperty Name="equipo" Relationship="Self.FK_software_device_device" FromRole="software_device" ToRole="equipo" />
+    <NavigationProperty Name="software" Relationship="Self.FK_software_device_software" FromRole="software_device" ToRole="software" />
+  </EntityType>
+  <EntityType Name="tipo_de_equipo">
+    <Key>
+      <PropertyRef Name="idtipo_de_equipo" />
+    </Key>
+    <Property Name="idtipo_de_equipo" Type="Int32" Nullable="false" />
+    <Property Name="categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="equipo" Relationship="Self.FK_device_devicetype" FromRole="tipo_de_equipo" ToRole="equipo" />
+  </EntityType>
+  <EntityType Name="ubicacion">
+    <Key>
+      <PropertyRef Name="idubicacion" />
+    </Key>
+    <Property Name="idubicacion" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="coordenadas" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="nombre_de_contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="telefono_de_contacto" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="celular_de_contacto" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="es_datacenter" Type="SByte" />
+    <Property Name="es_cloud" Type="SByte" />
+    <Property Name="pais_fk" Type="Int32" />
+    <Property Name="ciudad_fk" Type="Int32" />
+    <Property Name="is_active" Type="SByte" />
+    <NavigationProperty Name="compania" Relationship="Self.FK_location_company" FromRole="ubicacion" ToRole="compania" />
+    <NavigationProperty Name="rack" Relationship="Self.FK_module_location" FromRole="ubicacion" ToRole="rack" />
+  </EntityType>
+  <Association Name="FK_atributo_dispositivo">
+    <End Role="equipo" Type="Self.equipo" Multiplicity="0..1" />
+    <End Role="atributo" Type="Self.atributo" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_location_company">
+    <End Role="compania" Type="Self.compania" Multiplicity="0..1" />
+    <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_device_devicetype">
+    <End Role="tipo_de_equipo" Type="Self.tipo_de_equipo" Multiplicity="0..1" />
+    <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_puerto_por_equipo_equipo">
+    <End Role="equipo" Type="Self.equipo" Multiplicity="0..1" />
+    <End Role="puerto_por_equipo" Type="Self.puerto_por_equipo" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_software_device_device">
+    <End Role="equipo" Type="Self.equipo" Multiplicity="1" />
+    <End Role="software_device" Type="Self.software_device" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_device_rack_rack">
+    <End Role="rack" Type="Self.rack" Multiplicity="0..1" />
+    <End Role="equipo_por_rack" Type="Self.equipo_por_rack" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_puerto_por_equipo_puerto">
+    <End Role="puerto" Type="Self.puerto" Multiplicity="0..1" />
+    <End Role="puerto_por_equipo" Type="Self.puerto_por_equipo" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_module_location">
+    <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="0..1" />
+    <End Role="rack" Type="Self.rack" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_software_device_software">
+    <End Role="software" Type="Self.software" Multiplicity="1" />
+    <End Role="software_device" Type="Self.software_device" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="cloudmanageEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="atributo" EntityType="Self.atributo" />
+    <EntitySet Name="ciudad" EntityType="Self.ciudad" />
+    <EntitySet Name="compania" EntityType="Self.compania" />
+    <EntitySet Name="equipo" EntityType="Self.equipo" />
+    <EntitySet Name="equipo_por_rack" EntityType="Self.equipo_por_rack" />
+    <EntitySet Name="pais" EntityType="Self.pais" />
+    <EntitySet Name="puerto" EntityType="Self.puerto" />
+    <EntitySet Name="puerto_por_equipo" EntityType="Self.puerto_por_equipo" />
+    <EntitySet Name="rack" EntityType="Self.rack" />
+    <EntitySet Name="software" EntityType="Self.software" />
+    <EntitySet Name="software_device" EntityType="Self.software_device" />
+    <EntitySet Name="tipo_de_equipo" EntityType="Self.tipo_de_equipo" />
+    <EntitySet Name="ubicacion" EntityType="Self.ubicacion" />
+    <AssociationSet Name="FK_atributo_dispositivo" Association="Self.FK_atributo_dispositivo">
+      <End Role="equipo" EntitySet="equipo" />
+      <End Role="atributo" EntitySet="atributo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_location_company" Association="Self.FK_location_company">
+      <End Role="compania" EntitySet="compania" />
+      <End Role="ubicacion" EntitySet="ubicacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_device_devicetype" Association="Self.FK_device_devicetype">
+      <End Role="tipo_de_equipo" EntitySet="tipo_de_equipo" />
+      <End Role="equipo" EntitySet="equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_puerto_por_equipo_equipo" Association="Self.FK_puerto_por_equipo_equipo">
+      <End Role="equipo" EntitySet="equipo" />
+      <End Role="puerto_por_equipo" EntitySet="puerto_por_equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_software_device_device" Association="Self.FK_software_device_device">
+      <End Role="equipo" EntitySet="equipo" />
+      <End Role="software_device" EntitySet="software_device" />
+    </AssociationSet>
+    <AssociationSet Name="FK_device_rack_rack" Association="Self.FK_device_rack_rack">
+      <End Role="rack" EntitySet="rack" />
+      <End Role="equipo_por_rack" EntitySet="equipo_por_rack" />
+    </AssociationSet>
+    <AssociationSet Name="FK_puerto_por_equipo_puerto" Association="Self.FK_puerto_por_equipo_puerto">
+      <End Role="puerto" EntitySet="puerto" />
+      <End Role="puerto_por_equipo" EntitySet="puerto_por_equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_module_location" Association="Self.FK_module_location">
+      <End Role="ubicacion" EntitySet="ubicacion" />
+      <End Role="rack" EntitySet="rack" />
+    </AssociationSet>
+    <AssociationSet Name="FK_software_device_software" Association="Self.FK_software_device_software">
+      <End Role="software" EntitySet="software" />
+      <End Role="software_device" EntitySet="software_device" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

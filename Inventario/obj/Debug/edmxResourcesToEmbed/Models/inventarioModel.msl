@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="cloudmanageModelStoreContainer" CdmEntityContainer="cloudmanageEntities">
+    <EntitySetMapping Name="atributo">
+      <EntityTypeMapping TypeName="cloudmanageModel.atributo">
+        <MappingFragment StoreEntitySet="atributo">
+          <ScalarProperty Name="idatributo" ColumnName="idatributo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ciudad">
+      <EntityTypeMapping TypeName="cloudmanageModel.ciudad">
+        <MappingFragment StoreEntitySet="ciudad">
+          <ScalarProperty Name="idciudad" ColumnName="idciudad" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="compania">
+      <EntityTypeMapping TypeName="cloudmanageModel.compania">
+        <MappingFragment StoreEntitySet="compania">
+          <ScalarProperty Name="idcompania" ColumnName="idcompania" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="celular" ColumnName="celular" />
+          <ScalarProperty Name="contacto" ColumnName="contacto" />
+          <ScalarProperty Name="pais_fk" ColumnName="pais_fk" />
+          <ScalarProperty Name="ciudad_fk" ColumnName="ciudad_fk" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="ruc" ColumnName="ruc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipo">
+      <EntityTypeMapping TypeName="cloudmanageModel.equipo">
+        <MappingFragment StoreEntitySet="equipo">
+          <ScalarProperty Name="idequipo" ColumnName="idequipo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="informacion" ColumnName="informacion" />
+          <ScalarProperty Name="alto" ColumnName="alto" />
+          <ScalarProperty Name="anrcho" ColumnName="anrcho" />
+          <ScalarProperty Name="profundidad" ColumnName="profundidad" />
+          <ScalarProperty Name="es_contenedor" ColumnName="es_contenedor" />
+          <ScalarProperty Name="path_imagen" ColumnName="path_imagen" />
+          <ScalarProperty Name="es_activo" ColumnName="es_activo" />
+          <ScalarProperty Name="es_virtual" ColumnName="es_virtual" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipo_por_rack">
+      <EntityTypeMapping TypeName="cloudmanageModel.equipo_por_rack">
+        <MappingFragment StoreEntitySet="equipo_por_rack">
+          <ScalarProperty Name="idequipo_por_rack" ColumnName="idequipo_por_rack" />
+          <ScalarProperty Name="equipo_fk" ColumnName="equipo_fk" />
+          <ScalarProperty Name="s_equipo_serial_num" ColumnName="s_equipo_serial_num" />
+          <ScalarProperty Name="s_equipo_fecha_configuracion" ColumnName="s_equipo_fecha_configuracion" />
+          <ScalarProperty Name="es_activo" ColumnName="es_activo" />
+          <ScalarProperty Name="es_virtual" ColumnName="es_virtual" />
+          <ScalarProperty Name="responsable_fk" ColumnName="responsable_fk" />
+          <ScalarProperty Name="es_propio" ColumnName="es_propio" />
+          <ScalarProperty Name="comentarios" ColumnName="comentarios" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pais">
+      <EntityTypeMapping TypeName="cloudmanageModel.pais">
+        <MappingFragment StoreEntitySet="pais">
+          <ScalarProperty Name="idpais" ColumnName="idpais" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="puerto">
+      <EntityTypeMapping TypeName="cloudmanageModel.puerto">
+        <MappingFragment StoreEntitySet="puerto">
+          <ScalarProperty Name="idpuerto" ColumnName="idpuerto" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="especificaciones" ColumnName="especificaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="puerto_por_equipo">
+      <EntityTypeMapping TypeName="cloudmanageModel.puerto_por_equipo">
+        <MappingFragment StoreEntitySet="puerto_por_equipo">
+          <ScalarProperty Name="idpuerto_por_equipo" ColumnName="idpuerto_por_equipo" />
+          <ScalarProperty Name="numero_de_puertos" ColumnName="numero_de_puertos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rack">
+      <EntityTypeMapping TypeName="cloudmanageModel.rack">
+        <MappingFragment StoreEntitySet="rack">
+          <ScalarProperty Name="idrack" ColumnName="idrack" />
+          <ScalarProperty Name="s_code" ColumnName="s_code" />
+          <ScalarProperty Name="s_name" ColumnName="s_name" />
+          <ScalarProperty Name="i_order" ColumnName="i_order" />
+          <ScalarProperty Name="i_altura_u" ColumnName="i_altura_u" />
+          <ScalarProperty Name="i_prof_inch" ColumnName="i_prof_inch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="software">
+      <EntityTypeMapping TypeName="cloudmanageModel.software">
+        <MappingFragment StoreEntitySet="software">
+          <ScalarProperty Name="idsoftware" ColumnName="idsoftware" />
+          <ScalarProperty Name="s_software_name" ColumnName="s_software_name" />
+          <ScalarProperty Name="s_version" ColumnName="s_version" />
+          <ScalarProperty Name="s_software_code" ColumnName="s_software_code" />
+          <ScalarProperty Name="s_provider" ColumnName="s_provider" />
+          <ScalarProperty Name="software_type_fk" ColumnName="software_type_fk" />
+          <ScalarProperty Name="s_technical_info" ColumnName="s_technical_info" />
+          <ScalarProperty Name="s_configurations" ColumnName="s_configurations" />
+          <ScalarProperty Name="b_is_active" ColumnName="b_is_active" />
+          <ScalarProperty Name="i_licences_acq_number" ColumnName="i_licences_acq_number" />
+          <ScalarProperty Name="i_installed_licences" ColumnName="i_installed_licences" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="software_device">
+      <EntityTypeMapping TypeName="cloudmanageModel.software_device">
+        <MappingFragment StoreEntitySet="software_device">
+          <ScalarProperty Name="idsoftware_device" ColumnName="idsoftware_device" />
+          <ScalarProperty Name="s_software_version" ColumnName="s_software_version" />
+          <ScalarProperty Name="s_device_serial_num" ColumnName="s_device_serial_num" />
+          <ScalarProperty Name="b_is_active" ColumnName="b_is_active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_de_equipo">
+      <EntityTypeMapping TypeName="cloudmanageModel.tipo_de_equipo">
+        <MappingFragment StoreEntitySet="tipo_de_equipo">
+          <ScalarProperty Name="idtipo_de_equipo" ColumnName="idtipo_de_equipo" />
+          <ScalarProperty Name="categoria" ColumnName="categoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ubicacion">
+      <EntityTypeMapping TypeName="cloudmanageModel.ubicacion">
+        <MappingFragment StoreEntitySet="ubicacion">
+          <ScalarProperty Name="idubicacion" ColumnName="idubicacion" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="coordenadas" ColumnName="coordenadas" />
+          <ScalarProperty Name="nombre_de_contacto" ColumnName="nombre_de_contacto" />
+          <ScalarProperty Name="telefono_de_contacto" ColumnName="telefono_de_contacto" />
+          <ScalarProperty Name="celular_de_contacto" ColumnName="celular_de_contacto" />
+          <ScalarProperty Name="es_datacenter" ColumnName="es_datacenter" />
+          <ScalarProperty Name="es_cloud" ColumnName="es_cloud" />
+          <ScalarProperty Name="pais_fk" ColumnName="pais_fk" />
+          <ScalarProperty Name="ciudad_fk" ColumnName="ciudad_fk" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_atributo_dispositivo" TypeName="cloudmanageModel.FK_atributo_dispositivo" StoreEntitySet="atributo">
+      <EndProperty Name="equipo">
+        <ScalarProperty Name="idequipo" ColumnName="equipo_fk" />
+      </EndProperty>
+      <EndProperty Name="atributo">
+        <ScalarProperty Name="idatributo" ColumnName="idatributo" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="equipo_fk" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_location_company" TypeName="cloudmanageModel.FK_location_company" StoreEntitySet="ubicacion">
+      <EndProperty Name="compania">
+        <ScalarProperty Name="idcompania" ColumnName="company_fk" />
+      </EndProperty>
+      <EndProperty Name="ubicacion">
+        <ScalarProperty Name="idubicacion" ColumnName="idubicacion" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="company_fk" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_device_devicetype" TypeName="cloudmanageModel.FK_device_devicetype" StoreEntitySet="equipo">
+      <EndProperty Name="tipo_de_equipo">
+        <ScalarProperty Name="idtipo_de_equipo" ColumnName="devicetype_fk" />
+      </EndProperty>
+      <EndProperty Name="equipo">
+        <ScalarProperty Name="idequipo" ColumnName="idequipo" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="devicetype_fk" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_puerto_por_equipo_equipo" TypeName="cloudmanageModel.FK_puerto_por_equipo_equipo" StoreEntitySet="puerto_por_equipo">
+      <EndProperty Name="equipo">
+        <ScalarProperty Name="idequipo" ColumnName="equipo_fk" />
+      </EndProperty>
+      <EndProperty Name="puerto_por_equipo">
+        <ScalarProperty Name="idpuerto_por_equipo" ColumnName="idpuerto_por_equipo" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="equipo_fk" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_software_device_device" TypeName="cloudmanageModel.FK_software_device_device" StoreEntitySet="software_device">
+      <EndProperty Name="equipo">
+        <ScalarProperty Name="idequipo" ColumnName="device_fk" />
+      </EndProperty>
+      <EndProperty Name="software_device">
+        <ScalarProperty Name="idsoftware_device" ColumnName="idsoftware_device" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_device_rack_rack" TypeName="cloudmanageModel.FK_device_rack_rack" StoreEntitySet="equipo_por_rack">
+      <EndProperty Name="rack">
+        <ScalarProperty Name="idrack" ColumnName="rack_fk" />
+      </EndProperty>
+      <EndProperty Name="equipo_por_rack">
+        <ScalarProperty Name="idequipo_por_rack" ColumnName="idequipo_por_rack" />
+        <ScalarProperty Name="equipo_fk" ColumnName="equipo_fk" />
+        <ScalarProperty Name="s_equipo_serial_num" ColumnName="s_equipo_serial_num" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="rack_fk" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_puerto_por_equipo_puerto" TypeName="cloudmanageModel.FK_puerto_por_equipo_puerto" StoreEntitySet="puerto_por_equipo">
+      <EndProperty Name="puerto">
+        <ScalarProperty Name="idpuerto" ColumnName="puerto_fk" />
+      </EndProperty>
+      <EndProperty Name="puerto_por_equipo">
+        <ScalarProperty Name="idpuerto_por_equipo" ColumnName="idpuerto_por_equipo" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="puerto_fk" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_module_location" TypeName="cloudmanageModel.FK_module_location" StoreEntitySet="rack">
+      <EndProperty Name="ubicacion">
+        <ScalarProperty Name="idubicacion" ColumnName="location_fk" />
+      </EndProperty>
+      <EndProperty Name="rack">
+        <ScalarProperty Name="idrack" ColumnName="idrack" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="location_fk" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_software_device_software" TypeName="cloudmanageModel.FK_software_device_software" StoreEntitySet="software_device">
+      <EndProperty Name="software">
+        <ScalarProperty Name="idsoftware" ColumnName="software_fk" />
+      </EndProperty>
+      <EndProperty Name="software_device">
+        <ScalarProperty Name="idsoftware_device" ColumnName="idsoftware_device" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

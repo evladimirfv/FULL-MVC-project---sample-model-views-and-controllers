@@ -1,0 +1,677 @@
+﻿@*https://www.telerik.com/forums/treeview-datasource-how-to-refresh-*@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <meta charset="utf-8" />
+    @* <meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    @*   @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+
+
+    <title>@ViewBag.Title - Plataforma .</title>
+
+    @*jgrid*@
+    @*<link rel="stylesheet" href="@Url.Content("~/Scripts/jsgrid.min.css")">
+        <link rel="stylesheet" href="@Url.Content("~/Scripts/jsgrid-theme.min.css")">*@
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/w3.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/foxstyles.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/phoenix.css")">
+    @*<link rel="stylesheet" href="@Url.Content("Site.css")" />*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/inventario.css")" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
+
+
+    <script src="@Url.Content("~/Content/dash/bower_components/popper.js/dist/umd/popper.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/moment/moment.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/chart.js/dist/Chart.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/select2/dist/js/select2.full.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/ckeditor/ckeditor.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap-validator/dist/validator.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap-daterangepicker/daterangepicker.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/dropzone/dist/dropzone.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/editable-table/mindmup-editabletable.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/datatables.net/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/fullcalendar/dist/fullcalendar.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/tether/dist/js/tether.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/slick-carousel/slick/slick.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/util.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/alert.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/button.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/carousel.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/collapse.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/dropdown.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/modal.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/tab.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/tooltip.js")"></script>
+    <script src="@Url.Content("~/Content/dash/bower_components/bootstrap/js/dist/popover.js")"></script>
+    <script src="@Url.Content("~/Content/dash/js/demo_customizer.js?version=4.4.0")"></script>
+    <script src="@Url.Content("~/Content/dash/js/main.js?version=4.4.0")"></script>
+
+
+    <!--Scripts Seccion -->
+    @Scripts.Render("~/bundles/jquery")
+    <link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.2.902/kendo.dataviz.default.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.902/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.902/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.902/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.902/kendo.treeview.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.2.902/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <script src="@Url.Content("~/Content/dash/js/chart_layer.min.js")"></script>
+    <script src="@Url.Content("~/Content/dash/js/numeral.min.js")"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.11.0/umd/popper.min.js"></script>
+
+
+
+    <script src="~/Content/Racks.js"></script>
+
+
+
+    @* VOLORED MINUS *@
+
+
+    @*     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common-bootstrap.min.css" /> *@
+    @*     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.bootstrap.min.css" /> *@
+    @*     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.bootstrap.mobile.min.css" /> *@
+    @* *@
+    @*     <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script> *@
+    @* <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script> *@
+    @* *@
+    @* *@
+
+
+
+
+    <!-- CUSTOM STYLES -->
+    @* <script src="@Url.Content("~/Content/dash/font-awesome-4.7.0/css/font-awesome-all.min.js")"></script> *@
+    <link rel="stylesheet" href="@Url.Content("~/Content/dash/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/dash/main.css?v=234234")">
+    <link href="~/Content/dash/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <!--End Scripts Seccion -->
+    @*jgrid*@
+    @*<script src="@Url.Content("~/Scripts/jsgrid.min.js")"></script>*@
+
+
+
+    @*<script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script>*@
+
+
+
+
+</head>
+
+<body class="menu-position-side menu-side-left full-screen with-content-panel">
+
+   
+    @RenderSection("scripts", required: false)
+
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="all-wrapper with-side-panel solid-bg-all">
+
+
+        @*<div class="layout-w">*@
+        <div class=@(Request.IsAuthenticated == true?"layout-w":"layout-w-negro")>
+
+
+                @if (Request.IsAuthenticated)
+                {
+
+                    <div class="menu-w selected-menu-color-light menu-activated-on-hover menu-has-selected-link color-scheme-dark color-style-default sub-menu-color-bright menu-position-side menu-side-left menu-layout-compact sub-menu-style-over" style>
+                        <div class="">
+                            <a class="logo" href="#">
+
+                                <img style="width:180px!important;display:block!important;margin-left:auto!important;margin-right:auto!important" alt="" src="@Url.Content("~/Content/dash/logo_empresas.png")">
+
+                            </a>
+                        </div>
+
+
+
+                        <h1 class="menu-page-header">
+                            Page Header
+                        </h1>
+
+
+
+
+
+
+                        <ul class="main-menu" id="menuDash">
+
+
+
+
+                            @*Top Space*@
+                            <li class="sub-header" style="height:40px;" !important>
+                                <span>  </span>
+                            </li>
+
+
+
+
+
+                            @*<li class="sub-header" style="color:white!important;font-weight:bolder">
+                            <span> INVENTARIO TECNOLOGICO </span>
+                        </li>*@
+
+                            @*https://www.w3schools.com/icons/fontawesome5_icons_computers.asp*@
+
+
+
+                            <li class="sub-header" style="color:white!important;font-weight:bolder">
+                                <span>  </span>
+                            </li>
+
+                            @InventarioTree(1, "")
+
+
+                            <li class="sub-header" style="color:white!important;font-weight:bolder">
+                                <span> INSTANCIAS </span>
+                            </li>
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/racks/index" style="font-size:smaller;color:white!important">   @*#00AcE8*@
+                                    <div class="icon-w">
+                                        <div class="fas fa-server"></div>
+                                    </div>
+                                    <span>Rack</span>
+                                </a>
+                            </li>
+
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/equipos/index" style="font-size:smaller;color:white!important">
+                                    <div class="icon-w">
+                                        <div class="fas fa-desktop" style="color:lightgrey!important"></div>
+                                    </div>
+                                    <span>Equipo</span>
+                                </a>
+                            </li>
+
+
+
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/softwares/index" style="font-size:smaller;color:white!important">
+                                    <div class="icon-w">
+                                        <div class="fab fa-stripe-s"></div>
+                                    </div>
+                                    <span>Software</span>
+                                </a>
+                            </li>
+
+
+
+                            <li class="sub-header" style="color:white!important;font-weight:bolder">
+                                <span> CATALOGOS </span>
+                            </li>
+
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/atributos/index" style="font-size:smaller">
+                                    <div class="icon-w">
+                                        <div class="fas fa-angle-double-down"></div>
+                                    </div>
+                                    <span>Atributo equipo</span>
+                                </a>
+                            </li>
+
+
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/tipo_de_equipo/index" style="font-size:smaller">
+                                    <div class="icon-w">
+                                        <div class="fas fa-cubes" style="color:lightgrey!important"></div>
+                                    </div>
+                                    <span>Tipo de equipo</span>
+                                </a>
+                            </li>
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/marca_modelo/index" style="font-size:smaller">
+                                    <div class="icon-w">
+                                        <div class="fa fa-wpforms" style="color:lightgrey!important"></div>
+                                    </div>
+                                    <span>Marca-modelo de equipo</span>
+                                </a>
+                            </li>
+
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/puertos/index" style="font-size:smaller">
+                                    <div class="icon-w">
+                                        <div class="fab fa-bluetooth"></div>
+                                    </div>
+                                    <span>Puerto de comunicación</span>
+                                </a>
+                            </li>
+
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/tipo_de_software/index" style="font-size:smaller">
+                                    <div class="icon-w">
+                                        <div class="far fa-clone"></div>
+                                    </div>
+                                    <span>Tipo de Software</span>
+                                </a>
+                            </li>
+
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/proveedores/index" style="font-size:smaller">
+                                    <div class="icon-w">
+                                        <div class="far fa-handshake"></div>
+                                    </div>
+                                    <span>Proveedores</span>
+                                </a>
+                            </li>
+
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/Responsables/index" style="font-size:smaller">
+                                    <div class="icon-w">
+                                        <div class="fas fa-glasses"></div>
+                                    </div>
+                                    <span> Responsables </span>
+                                </a>
+                            </li>
+
+
+
+
+
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/ubicaciones/index" style="font-size:smaller">
+                                    <div class="icon-w">
+                                        <div class="fa fa-map-marker"></div>
+                                    </div>
+                                    <span>Ubicaciones</span>
+                                </a>
+                            </li>
+
+                            <li class="selected has-sub-menu" style="height:30px!important">
+                                <a href="~/ciudades/index" style="font-size:smaller">
+                                    <div class="icon-w">
+                                        <div class="far fa-building"></div>
+                                    </div>
+                                    <span> Ciudades </span>
+                                </a>
+                            </li>
+
+                            <li class="sub-header" style="color:white!important;font-weight:bolder">
+                                <span>  </span>
+                            </li>
+                            <li class="sub-header" style="color:white!important;font-weight:bolder">
+                                <span>  </span>
+                            </li>
+                            <li class="sub-header" style="color:white!important;font-weight:bolder">
+                                <span>  </span>
+                            </li>
+                            <li class="sub-header" style="color:white!important;font-weight:bolder">
+                                <span>  </span>
+                            </li>
+                            <li class="sub-header" style="color:white!important;font-weight:bolder">
+                                <span>  </span>
+                            </li>
+
+
+
+                        </ul>
+
+                    </div>
+
+                }
+
+
+
+                <div class="content-w">
+
+                    @using Microsoft.AspNet.Identity
+
+
+                    @if (Request.IsAuthenticated)                                   // NOT IS NOTHING NOW,
+                    {
+                        <div class="top-menu-controls">
+                            <div class="">
+                                @*<i class="far fa-search"></i> @searchHelper2(0, 0)*@
+                            </div>
+                        </div>
+
+                    }
+
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        Session["currentUserName"] = @User.Identity.GetUserName();
+                    }
+                    else
+                    {
+                        Session["currentUserName"] = "";
+                    }
+
+
+
+                    @if (Request.IsAuthenticated)
+                    {
+
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <span id="pPath" class="bread----Sa"></span>
+
+                            </li>
+
+                        </ul>
+
+                    }
+
+
+
+                    <div>
+                        @RenderBody()
+                        <div class=" mx-auto text-center">
+                            @*<img class="bgaval" src="@Url.Content("~/Content/dash/bgAL.png")">*@
+                        </div>
+                    </div>
+                </div> @*Div 1*@
+
+
+
+
+
+            </div>
+        </div>
+        <div class="display-type">  </div>
+    </div>
+
+
+
+
+    @*https://tutorial    shelper.com/dynamically-populated-treeview-in-kendo-using-mvc-2/*@
+
+    @helper InventarioTree(int param1, string param2)
+    {
+
+
+
+        <div class="demo-section k-content">
+            @(Html.Kendo().TreeView()
+                   .Name("treeview")
+                   .DataTextField("Name")
+
+                   .DataSource(dataSource => dataSource
+                       .Read(read =>
+                       read.Action("Treereadfilter", "Home").Data("additionalInformation"))
+
+                       ).Events(e => e.Select("showPage")).ExpandAll(true)
+               )
+            )
+        </div>
+
+
+        <script>
+
+            $("input").on("input", function () {
+                debugger;
+
+                var query = this.value.toLowerCase();
+                var myGrid = $("#treeview").data("kendoTreeView");
+
+                myGrid.dataSource.read();
+
+
+            });
+
+
+
+            function cleanFilter() {
+                $("#inputFilter").val('');
+            }
+
+            function additionalInformation() {
+
+                var fBy = $("input[name='group_1']:checked").val();
+
+           
+                
+                return {
+                    filterBy: fBy,
+                    filterVal: $("#inputFilter").val()
+                }
+            }
+
+
+
+        </script>
+
+        <style>
+
+
+
+            .k-content {
+                background-color: #353E4B;
+            }
+
+
+            .k-reset {
+                font-size: 80%;
+            }
+
+
+            .k-treeview {
+                color: #00ABE8 !important;
+            }
+
+
+
+
+
+            .k-widget {
+                color: #cfccc9;
+            }
+
+            .k-reset {
+                font-size: 80%;
+            }
+
+            .k-state-selected {
+                color: #3640d9 !important;
+                background-color: #a5e9e9 !important;
+                border-color: #010211 !important;
+            }
+
+            /* For treeview sprite color */
+            /*  #treeview .k-sprite {
+                width: 10px;
+                box-shadow: inset 0 0 2px #333;
+            }*/
+
+            .fa-map-marker {
+                color: white;
+            }
+
+            .fa-server {
+                color: lightgray;
+            }
+
+            .fa-desktop {
+                color: olive;
+            }
+
+
+
+
+
+
+
+            .rootfolder {
+                background-position: 0 0;
+            }
+
+            .folder {
+                background-position: 0 -16px;
+            }
+
+            .pdf {
+                background-position: 0 -32px;
+            }
+
+            .html {
+                background-position: 0 -48px;
+            }
+
+            .image {
+                background-position: 0 -64px;
+            }
+        </style>
+
+        <script type="text/javascript">
+
+            function recursiveReading(treeview, nodes) {
+
+
+                //debugger;
+                for (var i = 0; i < nodes.length; i++) {
+                    //console.log(nodes[i].Name);
+                    //debugger;
+                    if (nodes[i].spriteCssClass == 'fa fa-desktop') {  // && nodes[i].hasChildren == false
+                        nodes[i].append(
+                            {
+                                id: 100000 + nodes[i].id,
+                                Name: "Software",
+                                expanded: false,
+                                hasChildren: false,
+                                spriteCssClass: "fa fa-op",
+                            }
+                        );
+
+                        nodes[i].append(
+                            {
+                                id: 200000 + nodes[i].id,
+                                Name: "Puertos",
+                                expanded: false,
+                                hasChildren: false,
+                                spriteCssClass: "fa fa-op",
+                            }
+                        );
+
+                    }
+
+                    if (nodes[i].hasChildren) {
+                        recursiveReading(treeview, nodes[i].children.view());
+                    }
+
+                }
+            }
+
+
+            //function treeLoad(e) {
+
+            //    var treeview = $("#treeview").data("kendoTreeView");
+            //    var item = treeview.dataItem(e.node);
+
+            //    recursiveReading(treeview, treeview.dataSource.view());
+            //}
+
+
+
+
+            function showPage(e) {
+
+
+                var treeview = $("#treeview").data("kendoTreeView");
+                var item = treeview.dataItem(e.node);
+
+
+                // recursiveReading(treeview, treeview.dataSource.view());
+
+
+                if (item.spriteCssClass == "fa fa-server") {
+                    location.href = '/racks/Details/' + item.id;
+                }
+
+
+                if (item.spriteCssClass == "fa fa-desktop") {
+                    location.href = '/equipos/Details/' + item.id;
+                }
+
+
+
+
+            }
+        </script>
+
+
+
+    }
+
+
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+
+</body>
+
+
+
+</html>
+
+

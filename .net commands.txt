@@ -1,0 +1,7 @@
+dotnet tool install -g dotnet-ef
+
+dotnet ef dbcontext scaffold "server=localhost;port=3306;user=root;password=1234;database=cloudmanage" MySql.Data.EntityFrameworkCore -o Models
+
+dotnet ef dbcontext scaffold "server=localhost;port=3306;user=root;password=1234;database=cloudmanage" MySql.Data.EntityFrameworkCore -o cloudmanage -f
+
+EntityFrameworkCore\Update-Database -Verbose

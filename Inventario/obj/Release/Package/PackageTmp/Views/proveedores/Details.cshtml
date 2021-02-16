@@ -1,0 +1,66 @@
+﻿@model Inventario.Models.proveedor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h4>proveedor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_comercial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_comercial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_contacto_1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_contacto_1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono_contacto_1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono_contacto_1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_contacto_2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_contacto_2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono_contacto_2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono_contacto_2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_soporte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_soporte)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idproveedor }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

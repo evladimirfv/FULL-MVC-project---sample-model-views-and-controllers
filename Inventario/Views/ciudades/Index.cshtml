@@ -1,0 +1,45 @@
+﻿@model PagedList.PagedList<Inventario.Models.ciudad>
+@using PagedList.Mvc;
+ 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="font-weight:bold">Ciudades</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr class="blackImportant">
+        <th>
+            Nombre
+        </th>
+        <th>
+            @using (Html.BeginForm())
+            {
+                <div style="display:inline-block">
+                    @Html.TextBox("searchString", null, new { @class = "resizedTextbox" })
+                    <input id="buscarSubmit" type="submit" class="lupaImage" value="Buscar" />   @* btn btn-primary *@
+                    <button class="cancelarImage" onclick="clean();"> X </button>
+                </div>
+
+            }
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.idciudad }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Ver", "Details", new { id = item.idciudad }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Borrar", "Delete", new { id = item.idciudad }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>

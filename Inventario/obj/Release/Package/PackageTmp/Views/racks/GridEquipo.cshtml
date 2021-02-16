@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@{
+
+    var test = ViewBag.equipos;
+
+
+}
+
+
+@model IEnumerable<Inventario.Models.equipo_por_rack>
+
+@{
+    var modelo = new List<Inventario.Models.equipo_por_rack>();
+
+}
+
+@(Html.Kendo().Grid(Model)
+    .Name("gridEquipo")
+    .EnableCustomBinding(true)
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.rack_fk).Width(0).Hidden();
+        columns.Bound(p => p.equipo_fk).Width(0).Hidden(); /*.EditorTemplateName("ClientSoftware").ClientTemplate("#= software_fk#");*/
+        columns.Bound(p => p.equipo_por_rack_unique_id).Hidden();
+
+        columns.Bound(p => p.equipo_nombre).Width(150).Title("Equipo").EditorTemplateName("ClientEquipo").ClientTemplate("#= equipo_nombre#");
+
+        columns.Bound(p => p.inicia_u).Title("U inicio").Width(60);
+
+        columns.Command(command =>
+        { command.Edit().Text(" "); command.Destroy().Text(" "); }).Title(" ").Width(150);
+    })
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("Continue to delete this record?").DisplayDeleteConfirmation("Continue to delete this record?"))
+    .Events(ev => ev.Edit("edit"))
+    .Pageable()
+    // .AutoBind(false)
+    .Sortable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:250px;width:450px" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Events(events => events.Error("error_handler"))
+
+
+        .Model(
+            model =>
+            {
+                model.Field(p => p.rack_fk);
+                model.Field(p => p.equipo_fk);
+                model.Field(p => p.equipo_nombre);
+                model.Field(p => p.inicia_u);
+                model.Id(p => p.equipo_por_rack_unique_id);
+            }
+
+        )
+        .Create(update => update.Action("EditingInline_Create", "racks"))
+        .Read(read => read.Action("EditingInline_Read", "racks"))
+        .Update(update => update.Action("EditingInline_Update", "racks"))
+        .Destroy(update => update.Action("EditingInline_Destroy", "racks"))
+    )
+)
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
+
+<script>
+    function onRequestStart(e) {
+        if (e.type === "read" && $("#Id").val() === "0") {
+            e.preventDefault();
+
+        }
+
+    }
+</script>
+
+
+
+<script>
+    function edit(e) {
+        if (e.model.isNew() == false) {
+            var i = 2;
+            var columna = $('[name="equipo_nombre"]').data("kendoDropDownList");
+            var sfkmodelval = e.model.equipo_fk;
+            $('[name="equipo_nombre"]').data("kendoDropDownList").value(sfkmodelval);
+            var currentVal = columna.val;
+            columna.enable(false);
+            //    $('[name="software_nombre"]').val(3).change();
+        }
+    }
+</script>
+
+
+
+@*<script>    Puerto like method
+        function edit(e) {
+            var ddlEl = e.container.find("input[name='equipo_nombre']");
+            if (!e.model.isNew() && ddlEl.length > 0) {
+                var ddl = e.container.find("input[name='equipo_nombre']").data().kendoDropDownList;
+                ddlEl.v = 62;
+                ddl.enable(false);
+            }
+        }
+
+    </script>*@

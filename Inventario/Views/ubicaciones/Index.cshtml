@@ -1,0 +1,117 @@
+﻿@model PagedList.IPagedList<Inventario.Models.ubicacion>
+@using PagedList.Mvc;
+@using Inventario.Views;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="font-weight:bold">Ubicaciones</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr class="blackImportant">
+        <th>
+            Nombre
+        </th>
+        <th>
+            Dirección
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.coordenadas)
+        </th>*@
+        <th>
+            Contacto
+        </th>
+        <th>
+            Teléfono
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.celular_de_contacto)
+        </th>*@
+        <th>
+           Es Datacenter
+        </th>
+        <th>
+           Es Cloud
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.es_activo)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.pais.nombre)
+        </th>*@
+
+        @*<th>
+            @Html.DisplayNameFor(model => model.ciudad.nombre)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.compania.nombre)
+        </th>*@
+
+        <th>
+            @using (Html.BeginForm())
+            {
+                <div style="display:inline-block">
+                    @Html.TextBox("searchString", null, new { @class = "resizedTextbox" })
+                    <input id="buscarSubmit" type="submit" class="lupaImage" value="Buscar" />   @* btn btn-primary *@
+                    <button class="cancelarImage" onclick="clean();"> X </button>
+                </div>
+
+            }
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.direccion)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.coordenadas)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.nombre_de_contacto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.telefono_de_contacto)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.celular_de_contacto)
+        </td>*@
+<td>
+
+    @Html.CheckBoxIntFor(modelItem => item.es_datacenter, new { htmlAttributes = new { @class = "form-control" } }, "true")
+
+</td>
+<td>
+
+    @Html.CheckBoxIntFor(modelItem => item.es_cloud, new { htmlAttributes = new { @class = "form-control" } }, "true")
+
+</td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.es_activo)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.pais.nombre)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.ciudad.nombre)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.compania.nombre)
+        </td>*@
+
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.idubicacion }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Ver", "Details", new { id = item.idubicacion }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Borrar", "Delete", new { id = item.idubicacion }, new { @class = "btn btn-primary" })
+    </td>
+</tr>
+}
+
+</table>

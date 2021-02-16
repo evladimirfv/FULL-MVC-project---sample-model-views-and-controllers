@@ -1,0 +1,149 @@
+﻿@model Inventario.Models.rack
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal left-half" style="margin-left:0px!important;margin-top:15px!important;">
+    <h4 style="font-weight:bold;">Nuevo Rack</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.codigo, "Código", htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.codigo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.codigo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nombre, "Nombre", htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ubicacion_fk, "Ubicación", htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-8">
+            @Html.DropDownList("ubicacion_fk", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ubicacion_fk, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.orden, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.orden, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.orden, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.altura_u, "Altura(U)", htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.altura_u, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.altura_u, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.prof_inch, "Prof(Inch)", htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.prof_inch, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.prof_inch, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.proveedor_fk, "Proveedor", htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-8">
+            @Html.DropDownList("proveedor_fk", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.proveedor_fk, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @* Create Buttons *@
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            @Html.ActionLink("Listado", "Index", null, new { @class = "btn btn-primary btn-lg" })
+            @*<div class="divider"></div>*@
+            <input type="submit" value="Crear" class="btn btn-primary btn-lg" />
+        </div>
+    </div>
+
+    
+
+
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+<div class="right-half" style="margin-left:0px!important;margin-top:15px!important;">
+
+
+    <div class="form-group">
+        <div class="col-md-8">
+            <h4 style="font-weight:bold">Equipos por Rack </h4>
+            <hr />
+            @{Html.RenderPartial("GridEquipo", new List<Inventario.Models.equipo_por_rack>());}
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+<style>
+
+
+    .left-half {
+        background-color: transparent;
+        float: left;
+        width: 45%;
+    }
+
+    .right-half {
+        background-color: transparent;
+        float: left;
+        width: 50%;
+    }
+</style>
+
+
+@*.left-half1 {
+        background-color: transparent;
+        position: absolute;
+        left: 300px;
+        width: 50%;
+        height: auto;
+    }
+
+    .right-half1 {
+        background-color: transparent;
+        position: absolute;
+        right: 0px;
+        width: 40%;
+        height: auto;
+    }
+*@

@@ -1,0 +1,90 @@
+﻿@model Inventario.Models.rack
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h3 style="color:red;">Seguro va ha eliminar el siguiente Rack?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Código
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.codigo)
+        </dd>
+
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        @*<dt>
+               Orden
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.orden)
+            </dd>*@
+
+        <dt>
+            Altura(U)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.altura_u)
+        </dd>
+
+        <dt>
+            Profundidad(Inch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prof_inch)
+        </dd>
+
+        <dt>
+            Proveedor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proveedor.nombre_comercial)
+        </dd>
+
+        <dt>
+            Ubicación
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ubicacion.nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+     
+
+        <div class="col-md-offset-2 col-md-6">
+
+            @Html.ActionLink("Listado", "Index", null, new { @class = "btn btn-primary btn-lg" })
+            @*<div class="divider"></div>*@
+            <input type="submit" value="Borrar" class="btn btn-danger btn-lg" />
+
+
+        </div>
+    }
+</div>
+
+
+
+

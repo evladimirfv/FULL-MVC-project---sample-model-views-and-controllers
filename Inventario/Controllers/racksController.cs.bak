@@ -1,0 +1,236 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Inventario.Models;
+
+
+
+using System.Reflection;
+
+
+
+namespace Inventario.Controllers
+{
+    public partial class racksController : Controller
+    {
+        private cloudmanageEntities db = new cloudmanageEntities();
+
+        // GET: racks
+        public ActionResult Index()
+        {
+            var rack = db.rack.Include(r => r.proveedor).Include(r => r.ubicacion);
+            return View(rack.ToList());
+        }
+
+        // GET: racks/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            rack rack = db.rack.Find(id);
+            if (rack == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rack);
+        }
+
+        // GET: racks/Create
+        public ActionResult Create()
+        {
+            ViewBag.proveedor_fk = new SelectList(db.proveedor, "idproveedor", "nombre_comercial");
+    		ViewBag.equipos = new SelectList(db.equipo, "idequipo", "nombre");   //*****//
+       
+  			TempData["epr"] = new List<equipo_por_rack>();
+            TempData["equipoId"] = null;
+            ViewBag.ubicacion_fk = new SelectList(db.ubicacion, "idubicacion", "nombre");
+            return View();
+        }
+
+        // POST: racks/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "idrack,codigo,nombre,ubicacion_fk,orden,altura_u,prof_inch,proveedor_fk")] rack rack)
+        {
+            if (ModelState.IsValid)
+            {
+                db.rack.Add(rack);
+                db.SaveChanges();
+ 				/*Software por equipo*/
+                if (TempData["epr"] != null)    
+                {
+                   
+                    foreach (equipo_por_rack _spe in (List<equipo_por_rack>)TempData["epr"])
+                    {
+                        equipo_por_rack newItem = new equipo_por_rack();
+
+                        newItem.equipo = null;
+                        newItem.equipo_fk = _spe.equipo_fk;
+                        newItem.rack_fk = rack.idrack;
+                        newItem.observaciones = _spe.observaciones;
+
+
+                        db.equipo_por_rack.Add(newItem);
+
+                    }
+                }
+ 				db.SaveChanges();     
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.proveedor_fk = new SelectList(db.proveedor, "idproveedor", "nombre_comercial", rack.proveedor_fk);
+            ViewBag.ubicacion_fk = new SelectList(db.ubicacion, "idubicacion", "nombre", rack.ubicacion_fk);
+            return View(rack);
+        }
+
+        // GET: racks/Edit/5
+        public ActionResult Edit(int? id)
+        {
+  			TempData["epr"] = new List<equipo_por_rack>();
+ 			TempData["equipoId"] = id!=null?id:0;
+     		ViewBag.equipos = new SelectList(db.equipo, "idequipo", "nombre");   //*****//
+      
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            rack rack = db.rack.Find(id);
+            if (rack == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.proveedor_fk = new SelectList(db.proveedor, "idproveedor", "nombre_comercial", rack.proveedor_fk);
+            ViewBag.ubicacion_fk = new SelectList(db.ubicacion, "idubicacion", "nombre", rack.ubicacion_fk);
+            return View(rack);
+  			// Recover current existent values. 
+    		List<equipo_por_rack> exr = rack.equipo_por_rack.ToList();
+            TempData["epr"] = exr;
+        }
+
+        // POST: racks/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "idrack,codigo,nombre,ubicacion_fk,orden,altura_u,prof_inch,proveedor_fk")] rack rack)
+        {
+    		ViewBag.equipos = new SelectList(db.equipo, "idequipo", "nombre");   //*****//
+
+            if (ModelState.IsValid)
+            {
+                using (var dbDinamo = new cloudmanageEntities())
+                {
+
+                    foreach (atributo_por_equipo ar in equipo.atributo_por_equipo)
+                    {
+                                           
+                        if (dbDinamo.atributo_por_equipo.Find(ar.atributo_fk, ar.equipo_fk) != null)
+                        {
+                            db.Entry(ar).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                            db.Entry(ar).State = EntityState.Added;
+                        }
+                    }        
+                }
+
+           
+                db.Entry(equipo).State = EntityState.Modified;
+                 db.SaveChanges();
+
+
+                /*Software por equipo*/
+                if (TempData["spe"] != null)
+                {
+
+                    using (var dbDinamo = new cloudmanageEntities())
+                    {
+                        foreach (software_por_equipo _spe in (List<software_por_equipo>)TempData["spe"])
+                        {
+                           
+         
+
+                            if (dbDinamo.software_por_equipo.Find(_spe.equipo_fk, _spe.software_fk) != null)
+                            {
+                                _spe.equipo = null;
+                                _spe.software = null;
+
+
+                                if (_spe.observaciones == "DELETED")
+                                {
+                                    db.Entry(_spe).State = EntityState.Deleted;
+                                }
+                                else
+                                {
+                                    db.Entry(_spe).State = EntityState.Modified;
+                                }
+
+                                
+                            }
+                            else
+                            {
+                                software_por_equipo newItem = new software_por_equipo();
+
+                                newItem.software = null;
+                                newItem.software_fk = _spe.software_fk;
+                                newItem.equipo_fk = equipo.idequipo;
+                                newItem.observaciones = _spe.observaciones;
+
+                                db.Entry(newItem).State = EntityState.Added;
+                            }
+                        }
+                    }
+                }                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.proveedor_fk = new SelectList(db.proveedor, "idproveedor", "nombre_comercial", rack.proveedor_fk);
+            ViewBag.ubicacion_fk = new SelectList(db.ubicacion, "idubicacion", "nombre", rack.ubicacion_fk);
+            return View(rack);
+        }
+
+        // GET: racks/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            rack rack = db.rack.Find(id);
+            if (rack == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rack);
+        }
+
+        // POST: racks/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            rack rack = db.rack.Find(id);
+            db.rack.Remove(rack);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}
